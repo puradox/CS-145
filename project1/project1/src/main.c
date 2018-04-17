@@ -14,7 +14,7 @@ struct state
 	unsigned char led_on;
 };
 
-state_fn start, down_on, down_off, up_on, up_off, wind_down;
+state_fn start, down_on, down_off;
 
 void start(struct state *state)
 {
@@ -30,7 +30,11 @@ void down_on(struct state *state)
 	state->counter++;
 		
 	if (!state->button)
-		state->next = up_on;
+	{
+		state->next = start;
+		state->counter = 0;
+		state->led_on = 0;
+	}
 	
 	if (state->counter > 10)
 	{
@@ -45,7 +49,11 @@ void down_off(struct state *state)
 	state->counter++;
 
 	if (!state->button)
-		state->next = up_off;
+	{
+		state->next = start;
+		state->counter = 0;
+		state->led_on = 0;
+	}
 	
 	if (state->counter > 10)
 	{
@@ -53,49 +61,6 @@ void down_off(struct state *state)
 		state->counter = 0;
 		state->led_on = 1;
 	}
-}
-
-void up_on(struct state *state)
-{
-	state->counter++;
-	
-	if (state->button)
-	{
-		state->next = wind_down;
-		state->counter = 0;
-		state->led_on = 0;
-	}
-		
-	if (state->counter > 10)
-	{
-		state->next = up_off;
-		state->counter = 0;
-		state->led_on = 0;
-	}
-}
-
-void up_off(struct state *state)
-{
-	state->counter++;
-	
-	if (state->button)
-	{
-		state->next = wind_down;
-		state->counter = 0;
-	}
-	
-	if (state->counter > 10)
-	{
-		state->next = up_on;
-		state->counter = 0;
-		state->led_on = 1;
-	}
-}
-
-void wind_down(struct state *state)
-{	
-	if (!state->button)
-		state->next = start;
 }
 
 void wait(unsigned short ms)
@@ -131,7 +96,7 @@ int main()
 		else
 			CLR_BIT(PORTB, 0);
 			
-		wait_avr(5);
+		wait_avr(50);
 	}
 
 	return 0;
