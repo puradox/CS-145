@@ -92,9 +92,9 @@ int main()
 		s.next(&s);
 		
 		if (s.led_on)
-			SET_BIT(PORTB, 0);
+			PORTB |= 1;
 		else
-			CLR_BIT(PORTB, 0);
+			PORTB &= ~1;
 			
 		wait_avr(50);
 	}
