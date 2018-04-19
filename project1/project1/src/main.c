@@ -96,7 +96,7 @@ int main()
 		else
 			PORTB &= ~1;
 			
-		wait_avr(50);
+		wait(50);
 	}
 
 	return 0;
