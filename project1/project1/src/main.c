@@ -66,11 +66,11 @@ void down_off(struct state *state)
 void wait(unsigned short ms)
 {
   /*
-	volatile uint32_t counter = 0;
-	uint32_t loops = CLOCK_MHZ * 100 * ms / 3;
-	while (counter < loops)
-		counter++;
-	*/
+  volatile uint32_t counter = 0;
+  uint32_t loops = CLOCK_MHZ * 100 * ms / 3;
+  while (counter < loops)
+  counter++;
+  */
   wait_avr(ms);
 }
 
