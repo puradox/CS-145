@@ -2,14 +2,15 @@
 #include "avr.h"
 #include "lcd.h"
 
-int is_pressed_optimized(int row, int col)
+int is_pressed(int row, int col)
 {
     // Program row/column and clear everything else
     DDRC  = (1 << row);        // row is an output (strong 0)
     PORTC = (1 << (col + 4));  // col is a "pull up" input (weak 1)
 
-    // Read the column and inverse it
-    return ~(PINC & (1 << (col + 4)));
+    // Read the row/column
+    int result = PINC & (1 << (col + 4));
+    return result ? 0 : 1;
 }
 
 int get_key()
