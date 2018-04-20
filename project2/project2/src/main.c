@@ -1,40 +1,47 @@
-/**
- * \file
- *
- * \brief Empty user application template
- *
- */
-
-/**
- * \mainpage User Application template doxygen documentation
- *
- * \par Empty user application template
- *
- * Bare minimum empty user application template
- *
- * \par Content
- *
- * -# Include the ASF header files (through asf.h)
- * -# "Insert system clock initialization code here" comment
- * -# Minimal main function that starts with a call to board_init()
- * -# "Insert application code here" comment
- *
- */
-
-/*
- * Include header files for all drivers that have been imported from
- * Atmel Software Framework (ASF).
- */
-/*
- * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
- */
 #include <asf.h>
+#include "avr.h"
+#include "lcd.h"
+
+int is_pressed_optimized(int row, int col)
+{
+    // Program row/column and clear everything else
+    DDRC  = (1 << row);        // row is an output (strong 0)
+    PORTC = (1 << (col + 4));  // col is a "pull up" input (weak 1)
+
+    // Read the column and inverse it
+    return ~(PINC & (1 << (col + 4)));
+}
+
+int get_key()
+{
+    for (int row = 0; row < 4; ++row)
+    {
+        for (int col = 0; col < 4; ++col)
+        {
+            if (is_pressed(row, col))
+                return row * 4 + col + 1;
+        }
+    }
+}
 
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
-
+    // Initalization
 	board_init();
+    ini_avr();
+    //ini_lcd();
 
-	/* Insert application code here, after the board has been initialized. */
+    // Configure GPIO pins
+    DDRB |= (1 << 0);  // B0 is an output
+
+    for (;;) {
+        char key = get_key();
+
+        if (key)
+            PORTB |= 1;
+        else
+            PORTB &= ~1;
+    }
+
+    return 0;
 }
