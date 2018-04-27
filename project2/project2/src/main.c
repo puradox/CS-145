@@ -1,4 +1,3 @@
-#include <asf.h>
 #include "avr.h"
 #include "lcd.h"
 #include <stdio.h>
@@ -8,6 +7,7 @@ int is_pressed(int row, int col)
     // Program row/column and clear everything else
     DDRC  = (1 << row);        // row is an output (strong 0)
     PORTC = (1 << (col + 4));  // col is a "pull up" input (weak 1)
+    wait_avr(1);
 
     // Read the row/column
     int result = PINC & (1 << (col + 4));
@@ -29,7 +29,6 @@ int get_key()
 int main (void)
 {
     // Initalization
-	board_init();
     ini_avr();
     ini_lcd();
 
@@ -38,7 +37,7 @@ int main (void)
         pos_lcd(0, 0);
 
         char buf[17];
-        sprintf(buf, "%02i", key);
+        sprintf(buf, "TODO: %02i", key);
         puts_lcd2(buf);
     }
 
