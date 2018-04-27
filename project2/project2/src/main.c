@@ -1,6 +1,7 @@
 #include <asf.h>
 #include "avr.h"
 #include "lcd.h"
+#include <stdio.h>
 
 int is_pressed(int row, int col)
 {
@@ -30,18 +31,15 @@ int main (void)
     // Initalization
 	board_init();
     ini_avr();
-    //ini_lcd();
-
-    // Configure GPIO pins
-    DDRB |= (1 << 0);  // B0 is an output
+    ini_lcd();
 
     for (;;) {
-        char key = get_key();
+        int key = get_key();
+        pos_lcd(0, 0);
 
-        if (key)
-            PORTB |= 1;
-        else
-            PORTB &= ~1;
+        char buf[17];
+        sprintf(buf, "%02i", key);
+        puts_lcd2(buf);
     }
 
     return 0;
