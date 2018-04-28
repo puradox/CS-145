@@ -19,6 +19,8 @@ struct state
     // Clock
     //
 
+    int counter;
+
     // Date
     int year;
     int month;
@@ -29,19 +31,11 @@ struct state
     int minute;
     int second;
 
-    // Internal
-    int counter;
-
     //
     // Menu
     //
 
-    // Inputs
-    int number;
-    char menu;
-    char increment;
-    char decrement;
-    char military;
+    enum key key_pressed;
 };
 
 //
