@@ -1,45 +1,50 @@
 #include "avr.h"
 #include "lcd.h"
-#include <stdio.h>
+#include "timer.h"
+#include "state.h"
+#include "clock.h"
+#include "menu.h"
+#include "keypad.h"
 
-int is_pressed(int row, int col)
-{
-    // Program row/column and clear everything else
-    DDRC  = (1 << row);        // row is an output (strong 0)
-    PORTC = (1 << (col + 4));  // col is a "pull up" input (weak 1)
-    wait_avr(1);
-
-    // Read the row/column
-    int result = PINC & (1 << (col + 4));
-    return result ? 0 : 1;
-}
-
-int get_key()
-{
-    for (int row = 0; row < 4; ++row)
-    {
-        for (int col = 0; col < 4; ++col)
-        {
-            if (is_pressed(row, col))
-                return row * 4 + col + 1;
-        }
-    }
-}
-
-int main (void)
+int main(void)
 {
     // Initalization
     ini_avr();
     ini_lcd();
+    ini_timers();
 
-    for (;;) {
-        int key = get_key();
+    // Timer 0 is being used for the FSM loop.
+    // Timer 1 is not being used.
+    // Timer 2 is being used for the keypad and LCD.
+
+    struct state s = make_state(clock_start, menu_start);
+    char display[32];
+
+    while (s.next_clock != NULL && s.next_menu != NULL)
+    {
+        reset_timer0(MS_PER_CLOCK);
+
+        // Reset the Watchdog timer (expires in 2.1 seconds)
+        // If anything takes too long, the Watchdog timer will restart
+        // the ATMega32 and start at the beginning of the program.
+        asm volatile("wdr"::);
+
+        // Reset the keypad input
+        s.key_pressed = get_key();
+
+        // Run the finite state machines
+        s.next_menu(&s);
+        s.next_clock(&s);
+
+        // Update the LCD
         pos_lcd(0, 0);
-
-        char buf[17];
-        sprintf(buf, "TODO: %02i", key);
+        format_display(display, s);
         puts_lcd2(buf);
+
+        // Wait until the timer expires
+        wait_timer0();
     }
 
+    stop_timers();
     return 0;
 }
