@@ -34,7 +34,7 @@ struct state
     //
     // Menu
     //
-
+    int editing;
     enum key key_pressed;
 };
 
