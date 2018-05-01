@@ -71,3 +71,53 @@ void increment_second(struct state *s)
         s->second -= 60;
     }
 }
+
+void decrement_month(struct state *s)
+{
+    s->month--;
+    if (s->month < 1) {
+        decrement_year(s);
+        s->month += 12;
+    }
+}
+
+void decrement_day(struct state *s)
+{
+    s->day--;
+    if (s->day < 1) {
+        decrement_month(s);
+        s->day = days_in_month(s->month, s->year);
+    }
+}
+
+void decrement_year(struct state *)
+{
+    s->year--;
+}
+
+void decrement_hour(struct state *)
+{
+    s->hour--;
+    if (s->hour < 0) { // 0 or 1?
+        decrement_day(s);
+        s->hour += 24;
+    }
+}
+
+void decrement_minute(struct state *s)
+{
+    s->minute--;
+    if (s->minute < 0) {
+        decrement_hour(s);
+        s->minute += 60;
+    }
+}
+
+void decrement_second(struct state *s)
+{
+    s->second--;
+    if (s->minute < 0) {
+        decrement_minute(s);
+        s->second += 60;
+    }
+}

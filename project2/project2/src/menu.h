@@ -4,13 +4,13 @@
 #include "state.h"
 
 void menu_start(struct state *);
-void menu_controller(struct state *);
-void advance_option(struct state *);
-void increment_selected(struct state *);
-void decrement_selected(struct state *);
-void turn_menu_off(struct state *);
 
-// TODO (David): Complete the rest of the states
-
+void edit_none(struct state *);
+void edit_month(struct state *);
+void edit_day(struct state *);
+void edit_year(struct state *);
+void edit_hour(struct state *);
+void edit_minute(struct state *);
+void edit_second(struct state *);
 
 #endif

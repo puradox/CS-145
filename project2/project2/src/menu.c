@@ -5,42 +5,74 @@
 void menu_start(struct state *s)
 {
     s->editing = 0;
-    s->next_menu = menu_controller;
+    s->next_menu = edit_none;
 }
 
-void menu_controller(struct state *s)
+void edit_none(struct state *)
 {
     switch (s->key_pressed)
     {
-        case KEY_A : advance_option(s);
-        case KEY_B : increment_selected(s);
-        case KEY_C : decrement_selected(s);
-        case KEY_D : turn_menu_off(s);
-        default: ;
+        case KEY_A : s->next_menu = edit_month;
+        default: break;
     }
 }
 
-void advance_option(struct state *s)
+void edit_month(struct state *)
 {
-    s->editing += 1;
-    s->editing %= 7;
-}
-
-void increment_selected(struct state *s)
-{
-    switch (s->editing)
+    switch (s->key_pressed)
     {
-        case 0: ;
-        case 1: increment_month(s);
-        case 2: increment_day(s);
-        case 3: increment_year(s);
-        case 4: increment_hour(s);
-        case 5: increment_minute(s);
-        case 6: increment_second(s);
+        case KEY_A : s->next_menu = edit_day;
+        case KEY_B : increment_month(s);
+        case KEY_C : decrement_month(s);
+        case KEY_D : s->next_menu = edit_none;
+        default: break;
     }
 }
 
-void turn_menu_off(struct state *s)
+void edit_day(struct state *)
 {
-    s->editing =0;
+    switch (s->key_pressed)
+    {
+        case KEY_A : s->next_menu = edit_year;
+        case KEY_B : increment_day(s);
+        case KEY_C : decrement_day(s);
+        case KEY_D : s->next_menu = edit_none;
+        default: break;
+    }
+}
+
+void edit_year(struct state *)
+{
+    switch (s->key_pressed)
+    {
+        case KEY_A : s->next_menu = edit_hour;
+        case KEY_B : increment_year(s);
+        case KEY_C : decrement_year(s);
+        case KEY_D : s->next_menu = edit_none;
+        default: break;
+    }
+}
+
+void edit_hour(struct state *)
+{
+    switch (s->key_pressed)
+    {
+        case KEY_A : s->next_menu = edit_minute;
+        case KEY_B : increment_hour(s);
+        case KEY_C : decrement_hour(s);
+        case KEY_D : s->next_menu = edit_second;
+        default: break;
+    }
+}
+
+void edit_second(struct state *)
+{
+    switch (s->key_pressed)
+    {
+        case KEY_A : s->next_menu = edit_none;
+        case KEY_B: increment_second(s);
+        case KEY_C: decrement_second(s);
+        case KEY_D: s->next_menu = edit_none;
+        default: break;
+    }
 }
