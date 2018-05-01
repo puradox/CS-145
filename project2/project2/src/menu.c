@@ -1,4 +1,6 @@
 #include "menu.h"
+#include "keypad.h"
+#include "date_utils.h"
 
 void menu_start(struct state *s)
 {

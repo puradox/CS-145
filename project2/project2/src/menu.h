@@ -2,8 +2,6 @@
 #define MENU_H
 
 #include "state.h"
-#include "keypad.h"
-#include "clock.h"
 
 void menu_start(struct state *);
 void menu_controller(struct state *);
