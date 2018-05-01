@@ -1,2 +1,0 @@
-CMakeLists.txt not found in C:\Users\David\Documents\CS145\CS-145\project2
-Toolchains are not configured Configure
