@@ -34,4 +34,18 @@ const char DAYS_PER_MONTH_LEAP_YEAR[12] = {
 char is_leap_year(int year);
 char days_in_month(int month, int year);
 
+void increment_month(struct state *);
+void increment_day(struct state *);
+void increment_year(struct state *);
+void increment_hour(struct state *);
+void increment_minute(struct state *);
+void increment_second(struct state *);
+
+void decrement_month(struct state *);
+void decrement_day(struct state *);
+void decrement_year(struct state *);
+void decrement_hour(struct state *);
+void decrement_minute(struct state *);
+void decrement_second(struct state *);
+
 #endif
