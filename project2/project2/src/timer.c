@@ -1,5 +1,9 @@
 #include "timer.h"
 
+#include <avr/interrupt.h>
+#include <avr/pgmspace.h>
+#include <avr/io.h>
+
 //
 // For all timers
 //
@@ -99,7 +103,7 @@ void ini_timer2()
     TCCR2 = 0x03;
 }
 
-void reset_timer1(double ms)
+void reset_timer2(double ms)
 {
     // Reset this 8-bit Timer/Counter Register to just below the
     // number of cycles needed to overflow from the given duration.
