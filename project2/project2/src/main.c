@@ -38,12 +38,12 @@ int main(void)
 
         // Update the time
         pos_lcd(0, 0);
-        format_display(time, &s);
+        format_time(time, &s);
         puts_lcd2(time);
 
         // Update the date
         pos_lcd(1, 0);
-        format_display(date, &s);
+        format_date(date, &s);
         puts_lcd2(date);
 
         // Wait until the timer expires
