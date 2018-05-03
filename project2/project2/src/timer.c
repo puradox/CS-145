@@ -57,6 +57,11 @@ void stop_timer0()
     TCCR0 = 0x00;
 }
 
+/* Timer/Counter 1 is a bit different than the others
+   and requires more work to get working. If you need to
+   use this timer, find a way to finish the following
+   functions:
+
 //
 // 16-bit Timer/Counter 1
 //
@@ -91,6 +96,8 @@ void stop_timer1()
     // Clock Select: Turn off this 16-bit timer.
     TCCR1 = 0x00;
 }
+
+*/
 
 //
 // 8-bit Timer/Counter 2
