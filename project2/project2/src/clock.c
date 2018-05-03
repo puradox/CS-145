@@ -12,8 +12,13 @@ void clock_tick(struct state *s)
 
     if (s->counter >= CLOCKS_PER_SEC)
     {
-        s->minute += s->counter / CLOCKS_PER_SEC;
+        s->second += s->counter / CLOCKS_PER_SEC;
         s->counter %= CLOCKS_PER_SEC;
+    }
+    if (s->second >= 60)
+    {
+        s->minute += s->second / CLOCKS_PER_SEC;
+        s->second %= 60;
     }
     if (s->minute >= 60)
     {
