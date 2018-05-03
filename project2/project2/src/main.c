@@ -10,8 +10,8 @@ int main(void)
 {
     // Initalization
     ini_avr();
-    ini_lcd();
     ini_timers();
+    ini_lcd();
 
     // Timer 0 is being used for the FSM loop.
     // Timer 1 is not being used.
