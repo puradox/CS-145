@@ -22,6 +22,7 @@ struct state
     //
 
     int counter;
+    char is_military_time;
 
     // Date
     int year;

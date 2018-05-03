@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "state.h"
+#include "keypad.h"
 
 const char MONTHS[12][3] = {
     "Jan",
@@ -21,23 +22,26 @@ struct state make_state(state_fn *clock_start, state_fn *menu_start)
     struct state s = {
         clock_start, // next_clock
         menu_start,  // next_menu
+
+        // Clock
+        0,           // counter
+        0,           // is_military_time
         2018,        // year
         5,           // month
-        1,           // minute
+        2,           // day
+        4,           // hour
+        20,          // minute
         0,           // second
-        0,           // counter
-        0,           // number
-        0,           // menu
-        0,           // increment
-        0,           // decrement
-        0            // military
+
+        // Menu
+        KEY_NONE,    // key_pressed
     };
     return s;
 }
 
 void format_display(char *buf, struct state *s)
 {
-    if (s->military)
+    if (s->is_military_time)
     {
         sprintf(buf, "%2i:%02i:%02i        %s %2i, %4i    ",
                 s->hour, s->minute, s->second,
