@@ -1,8 +1,5 @@
-#include "timer.h"
-
-#include <avr/interrupt.h>
-#include <avr/pgmspace.h>
 #include <avr/io.h>
+#include "timer.h"
 
 //
 // For all timers

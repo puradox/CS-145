@@ -1,3 +1,4 @@
+#include <avr/io.h>
 #include "keypad.h"
 
 int is_pressed(int row, int col)
