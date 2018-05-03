@@ -22,7 +22,7 @@ int main(void)
 
     while (s.next_clock != 0 && s.next_menu != 0)
     {
-        reset_timer0(MS_PER_CLOCK);
+        reset_timer1(MS_PER_CLOCK);
 
         // Reset the Watchdog timer (expires in 2.1 seconds)
         // If anything takes too long, the Watchdog timer will restart
@@ -47,7 +47,7 @@ int main(void)
         puts_lcd2(date);
 
         // Wait until the timer expires
-        wait_timer0();
+        wait_timer1();
     }
 
     stop_timers();

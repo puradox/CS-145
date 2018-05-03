@@ -34,7 +34,7 @@ void reset_timer0(double ms)
 {
     // Reset this 8-bit Timer/Counter Register to just below the
     // number of cycles needed to overflow from the given duration.
-    TCNT0 = (unsigned char)(256 - (XTAL_FRQ / 64) * 0.001 * ms);
+    TCNT0 = (unsigned char)(256 - (XTAL_FRQ / 64) * (0.001 * ms));
 
     // Set the Timer/Counter Overflow Flag (TOV) to clear it.
     // It's weird, I know. But that's what the ATMega32 wants.
@@ -54,11 +54,6 @@ void stop_timer0()
     TCCR0 = 0x00;
 }
 
-/* Timer/Counter 1 is a bit different than the others
-   and requires more work to get working. If you need to
-   use this timer, find a way to finish the following
-   functions:
-
 //
 // 16-bit Timer/Counter 1
 //
@@ -67,7 +62,7 @@ void ini_timer1()
 {
     // Clock Select (CS12, CS11, CS10): clk/64
     // This 16-bit timer will increment every 64 clock cycles.
-    TCCR1 = 0x03;
+    TCCR1B = 0x03;
 }
 
 void reset_timer1(double ms)
@@ -91,10 +86,8 @@ void wait_timer1()
 void stop_timer1()
 {
     // Clock Select: Turn off this 16-bit timer.
-    TCCR1 = 0x00;
+    TCCR1B = 0x00;
 }
-
-*/
 
 //
 // 8-bit Timer/Counter 2

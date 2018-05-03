@@ -17,17 +17,11 @@ void reset_timer0(double ms);
 void wait_timer0(void);
 void stop_timer0(void);
 
-/* Timer/Counter 1 is a bit different than the others
-   and requires more work to get working. If you need to
-   use this timer, find a way to finish the following
-   functions:
-
 // 16-bit Timer/Counter 1
 void ini_timer1(void);
 void reset_timer1(double ms);
 void wait_timer1(void);
 void stop_timer1(void);
-*/
 
 // 8-bit Timer/Counter 2
 void ini_timer2(void);
