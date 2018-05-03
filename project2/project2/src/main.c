@@ -20,7 +20,7 @@ int main(void)
     struct state s = make_state(clock_start, menu_start);
     char display[32];
 
-    while (s.next_clock != NULL && s.next_menu != NULL)
+    while (s.next_clock != 0 && s.next_menu != 0)
     {
         reset_timer0(MS_PER_CLOCK);
 
@@ -38,8 +38,8 @@ int main(void)
 
         // Update the LCD
         pos_lcd(0, 0);
-        format_display(display, s);
-        puts_lcd2(buf);
+        format_display(display, &s);
+        puts_lcd2(display);
 
         // Wait until the timer expires
         wait_timer0();
