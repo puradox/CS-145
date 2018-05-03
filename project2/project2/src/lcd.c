@@ -1,3 +1,4 @@
+#include "avr.h"
 #include "timer.h"
 #include "lcd.h"
 
@@ -69,17 +70,17 @@ ini_lcd(void)
   SET_BIT(DDR, EN_PIN);
 
   reset_timer2(16);
-  wait_timer2(16);
+  wait_timer2();
 
   output(0x30, 0);
 
   reset_timer2(5);
-  wait_timer2(5);
+  wait_timer2();
 
   output(0x30, 0);
 
   reset_timer2(1);
-  wait_timer2(1);
+  wait_timer2();
 
   write(0x3c, 0);
   write(0x0c, 0);
