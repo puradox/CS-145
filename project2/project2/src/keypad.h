@@ -24,6 +24,6 @@ enum key {
 };
 
 int is_pressed(int row, int col);
-enum key get_key();
+enum key get_key(void);
 
 #endif
