@@ -1,5 +1,4 @@
 #include "avr.h"
-#include "timer.h"
 #include "lcd.h"
 
 #define DDR     DDRB
@@ -68,20 +67,11 @@ ini_lcd(void)
   SET_BIT(DDR, RS_PIN);
   SET_BIT(DDR, RW_PIN);
   SET_BIT(DDR, EN_PIN);
-
-  reset_timer2(16);
-  wait_timer2();
-
+  wait_avr(16);
   output(0x30, 0);
-
-  reset_timer2(5);
-  wait_timer2();
-
+  wait_avr(5);
   output(0x30, 0);
-
-  reset_timer2(1);
-  wait_timer2();
-
+  wait_avr(1);
   write(0x3c, 0);
   write(0x0c, 0);
   write(0x06, 0);
