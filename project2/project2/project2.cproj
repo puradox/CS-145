@@ -206,6 +206,24 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\menu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\menu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\state.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\state.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>
@@ -261,6 +279,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\avr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\clock.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\clock.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\keypad.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\lcd.c">
