@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include "keypad.h"
+
 #define MS_PER_CLOCK 5
 
 //
