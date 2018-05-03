@@ -3,9 +3,9 @@
 
 #include "state.h"
 
-const int CLOCKS_PER_SEC = 1000 / MS_PER_CLOCK;
+static const int CLOCKS_PER_SEC = 1000 / MS_PER_CLOCK;
 
-const char DAYS_PER_MONTH[12] = {
+static const char DAYS_PER_MONTH[12] = {
     31, // Jan
     28, // Feb
     31, // Mar
@@ -20,7 +20,7 @@ const char DAYS_PER_MONTH[12] = {
     31, // Dec
 };
 
-const char DAYS_PER_MONTH_LEAP_YEAR[12] = {
+static const char DAYS_PER_MONTH_LEAP_YEAR[12] = {
     31, // Jan
     29, // Feb
     31, // Mar
