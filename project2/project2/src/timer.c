@@ -11,14 +11,14 @@
 void ini_timers()
 {
     ini_timer0();
-    ini_timer1();
+    //ini_timer1();
     ini_timer2();
 }
 
 void stop_timers()
 {
     stop_timer0();
-    stop_timer1();
+    //stop_timer1();
     stop_timer2();
 }
 
