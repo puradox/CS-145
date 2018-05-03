@@ -1,8 +1,6 @@
 #ifndef KEYPAD_H
 #define KEYPAD_H
 
-#include "timer.h"
-
 enum key {
     KEY_NONE = 0,
     KEY_1,
