@@ -46,6 +46,7 @@ struct state
 //
 
 struct state make_state(state_fn *clock_start, state_fn *menu_start);
-void format_display(char *buf, struct state *s);
+void format_time(char *buf, struct state *s);
+void format_date(char *buf, struct state *s);
 
 #endif

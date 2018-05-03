@@ -18,7 +18,7 @@ int main(void)
     // Timer 2 is being used for the keypad and LCD.
 
     struct state s = make_state(clock_start, menu_start);
-    char display[32];
+    char time[16], date[16];
 
     while (s.next_clock != 0 && s.next_menu != 0)
     {
@@ -36,10 +36,15 @@ int main(void)
         s.next_menu(&s);
         s.next_clock(&s);
 
-        // Update the LCD
+        // Update the time
         pos_lcd(0, 0);
-        format_display(display, &s);
-        puts_lcd2(display);
+        format_display(time, &s);
+        puts_lcd2(time);
+
+        // Update the date
+        pos_lcd(1, 0);
+        format_display(date, &s);
+        puts_lcd2(date);
 
         // Wait until the timer expires
         wait_timer0();
