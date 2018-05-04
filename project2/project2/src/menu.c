@@ -79,7 +79,7 @@ void edit_hour(struct state *s)
     switch (s->key_pressed)
     {
     case KEY_A:
-        s->next_menu = edit_minute;
+        s->next_menu = edit_none;
         break;
     case KEY_B:
         increment_hour(s);

@@ -206,6 +206,15 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\date_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\date_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\menu.c">
       <SubType>compile</SubType>
     </Compile>

@@ -5,6 +5,7 @@
 #include "keypad.h"
 #include "clock.h"
 #include "menu.h"
+#include "config.h"
 
 static const unsigned short CTC_MAX = 125 * 10 - 1;
 static struct state s;
@@ -21,7 +22,7 @@ int main()
     ini_lcd();
 
     s = make_state(clock_start, menu_start);
-    start_timer1(10);
+    timer1_start(MS_PER_TICK);
 
     for (;;)
     {

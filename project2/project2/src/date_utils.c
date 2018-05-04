@@ -97,12 +97,12 @@ void decrement_day(struct state *s)
     }
 }
 
-void decrement_year(struct state *)
+void decrement_year(struct state *s)
 {
     s->year--;
 }
 
-void decrement_hour(struct state *)
+void decrement_hour(struct state *s)
 {
     s->hour--;
     if (s->hour < 0) { // 0 or 1?
