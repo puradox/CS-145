@@ -1,7 +1,8 @@
 #ifndef KEYPAD_H
 #define KEYPAD_H
 
-enum key {
+enum key
+{
     KEY_NONE = 0,
     KEY_1,
     KEY_2,
