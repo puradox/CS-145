@@ -5,6 +5,12 @@
 
 void menu_start(struct state *);
 
-// TODO (David): Complete the rest of the states
+void edit_none(struct state *);
+void edit_month(struct state *);
+void edit_day(struct state *);
+void edit_year(struct state *);
+void edit_hour(struct state *);
+void edit_minute(struct state *);
+void edit_second(struct state *);
 
 #endif

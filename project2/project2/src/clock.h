@@ -37,7 +37,5 @@ static const char DAYS_PER_MONTH_LEAP_YEAR[12] = {
 
 void clock_start(struct state *);
 void clock_tick(struct state *);
-char is_leap_year(int year);
-char days_in_month(int month, int year);
 
 #endif

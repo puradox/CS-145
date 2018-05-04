@@ -1,4 +1,7 @@
 #include "clock.h"
+#include "date_utils.h"
+
+const int CLOCKS_PER_SEC = 1000 / MS_PER_CLOCK;
 
 void clock_start(struct state *s)
 {
@@ -45,25 +48,4 @@ void clock_tick(struct state *s)
 
         max_days = days_in_month(s->month, s->year);
     }
-}
-
-char is_leap_year(int year)
-{
-    // A leap year extends February to 29 days, rather than the normal 28 days.
-    // These extra days occur in years which are multiples of four
-    // (with the exception of years divisible by 100 but not by 400).
-    if (year % 100 == 0 && year % 400 != 0)
-        return 0;
-    if (year % 4 == 0)
-        return 1;
-    else
-        return 0;
-}
-
-char days_in_month(int month, int year)
-{
-    if (is_leap_year(year))
-        return DAYS_PER_MONTH_LEAP_YEAR[month];
-    else
-        return DAYS_PER_MONTH[month];
 }
