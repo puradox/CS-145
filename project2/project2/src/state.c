@@ -43,6 +43,6 @@ void format_time(char *buf, struct state *s)
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s %2d, %4d",
+    sprintf(buf, "%s %d, %4d",
             MONTHS[s->month], s->day, s->year);
 }
