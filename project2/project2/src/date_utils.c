@@ -21,56 +21,63 @@ char days_in_month(int month, int year)
         return DAYS_PER_MONTH[month];
 }
 
-void increment_month(struct state *s)
-{
-    s->month++;
-    if (s->month >= 12) {
-        increment_year(s);
-        s->month -= 11;
-    }
-}
-
-void increment_day(struct state *s)
-{
-    s->day++;
-    int days_month = days_in_month(s->month, s->year);
-    if (s->day >= days_month) {
-        increment_month(s);
-        s->day -= days_month;
-    }
-}
+//
+// Increment
+//
 
 void increment_year(struct state *s)
 {
     s->year++;
 }
 
+void increment_month(struct state *s)
+{
+    s->month++;
+    if (s->month == 12) {
+        increment_year(s);
+        s->month = 0;
+    }
+}
+
+void increment_day(struct state *s)
+{
+    s->day++;
+    if (s->day == days_in_month(s->month, s->year) + 1) {
+        increment_month(s);
+        s->day = 1;
+    }
+}
+
 void increment_hour(struct state *s)
 {
     s->hour++;
-    if (s->hour >= 24) {
+    if (s->hour == 25) {
         increment_day(s);
-        s->hour -= 24;
+        s->hour = 1;
     }
 }
 
 void increment_minute(struct state *s)
 {
     s->minute++;
-    if (s->minute >= 60) {
+    if (s->minute == 60) {
         increment_hour(s);
-        s->minute -= 60;
+        s->minute = 60;
     }
 }
 
 void increment_second(struct state *s)
 {
     s->second++;
-    if (s->minute >= 60) {
+    if (s->second == 60) {
         increment_minute(s);
-        s->second -= 60;
+        s->second = 0;
     }
 }
+
+//
+// Decrement
+//
 
 void decrement_month(struct state *s)
 {

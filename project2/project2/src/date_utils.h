@@ -31,6 +31,21 @@ const char DAYS_PER_MONTH_LEAP_YEAR[12] = {
     31, // Dec
 };
 
+const char MONTHS[12][4] = {
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+};
+
 char is_leap_year(int year);
 char days_in_month(int month, int year);
 

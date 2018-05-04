@@ -1,21 +1,7 @@
 #include <stdio.h>
 #include "state.h"
 #include "keypad.h"
-
-const char MONTHS[12][4] = {
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-};
+#include "date_utils.h"
 
 struct state make_state(state_fn *clock_start, state_fn *menu_start)
 {
@@ -43,20 +29,20 @@ void format_time(char *buf, struct state *s)
 {
     if (s->is_military_time)
     {
-        sprintf(buf, "%2d:%02d:%02d        ",
+        sprintf(buf, "%2d:%02d:%02d",
                 s->hour, s->minute, s->second);
     }
     else
     {
-        int meridiem = s->hour > 12 ? "PM" : "AM";
+        int meridiem = s->hour >= 12 ? "PM" : "AM";
         int hour = ((s->hour - 1) % 12) + 1;
-        sprintf(buf, "%2d:%02d:%02d %s    ",
+        sprintf(buf, "%2d:%02d:%02d %s",
                 hour, s->minute, s->second, meridiem);
     }
 }
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s %2d, %4d    ",
+    sprintf(buf, "%s %2d, %4d",
             MONTHS[s->month], s->day, s->year);
 }

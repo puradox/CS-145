@@ -3,8 +3,6 @@
 
 #include "keypad.h"
 
-#define MS_PER_CLOCK 5
-
 //
 // Data types
 //
