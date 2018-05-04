@@ -3,8 +3,6 @@
 
 #include "state.h"
 
-static const int CLOCKS_PER_SEC = 1000 / MS_PER_CLOCK;
-
 static const char DAYS_PER_MONTH[12] = {
     31, // Jan
     28, // Feb
