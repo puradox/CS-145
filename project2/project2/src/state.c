@@ -35,7 +35,7 @@ void format_time(char *buf, struct state *s)
     else
     {
         int hour = (s->hour % 12 == 0) ? 12 : (s->hour % 12);
-        char meridiem[3] = (s->hour >= 12) ? "PM" : "AM";
+        char *meridiem = (s->hour >= 12) ? "PM" : "AM";
         sprintf(buf, "%2d:%02d:%02d %s",
                 hour, s->minute, s->second, meridiem);
     }
@@ -43,6 +43,6 @@ void format_time(char *buf, struct state *s)
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s%2d, %4d",
+    sprintf(buf, "%s %2d, %4d",
             MONTHS[s->month], s->day, s->year);
 }
