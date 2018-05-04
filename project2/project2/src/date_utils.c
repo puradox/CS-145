@@ -52,10 +52,10 @@ void increment_day(struct state *s)
 void increment_hour(struct state *s)
 {
     s->hour++;
-    if (s->hour == 25)
+    if (s->hour == 24)
     {
         increment_day(s);
-        s->hour = 1;
+        s->hour = 0;
     }
 }
 

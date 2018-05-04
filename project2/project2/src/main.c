@@ -53,8 +53,8 @@ TIMER1_TICK()
         puts_lcd2(time);
 
         // Update the date
-        //pos_lcd(1, 0);
-        //format_date(date, &s);
-        //puts_lcd2(date);
+        pos_lcd(1, 0);
+        format_date(date, &s);
+        puts_lcd2(date);
     }
 }

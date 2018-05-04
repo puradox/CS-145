@@ -13,9 +13,9 @@ struct state make_state(state_fn *clock_start, state_fn *menu_start)
         0,    // counter
         0,    // is_military_time
         2018, // year
-        12,    // month
+        11,    // month
         31,    // day
-        24,    // hour
+        23,    // hour
         59,   // minute
         0,    // second
 
@@ -29,13 +29,13 @@ void format_time(char *buf, struct state *s)
 {
     if (s->is_military_time)
     {
-        sprintf(buf, "%2d:%02d:%02d",
+        sprintf(buf, "%02d:%02d:%02d",
                 s->hour, s->minute, s->second);
     }
     else
     {
-        int meridiem = s->hour >= 12 ? "PM" : "AM";
-        int hour = ((s->hour - 1) % 12) + 1;
+        int hour = (s->hour % 12 == 0) ? 12 : (s->hour % 12);
+        char meridiem[3] = (s->hour >= 12) ? "PM" : "AM";
         sprintf(buf, "%2d:%02d:%02d %s",
                 hour, s->minute, s->second, meridiem);
     }
@@ -43,6 +43,6 @@ void format_time(char *buf, struct state *s)
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s %2d, %4d",
+    sprintf(buf, "%s%2d, %4d",
             MONTHS[s->month], s->day, s->year);
 }
