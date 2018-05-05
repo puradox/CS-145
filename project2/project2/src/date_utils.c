@@ -48,7 +48,8 @@ char days_in_month(int month, int year)
 // Increment
 //
 
-void increment_year(struct state *s) {
+void increment_year(struct state *s)
+{
     s->year++;
 }
 
@@ -59,6 +60,13 @@ void increment_month(struct state *s)
     {
         increment_year(s);
         s->month = 0;
+    }
+
+    // Make sure the day never extends over what the month allows.
+    int max_days = days_in_month(s->month, s->year);
+    if (s->day > max_days)
+    {
+        s->day = max_days;
     }
 }
 
@@ -118,6 +126,13 @@ void decrement_month(struct state *s)
     {
         decrement_year(s);
         s->month = 11;
+    }
+
+    // Make sure the day never extends over what the month allows.
+    int max_days = days_in_month(s->month, s->year);
+    if (s->day > max_days)
+    {
+        s->day = max_days;
     }
 }
 
