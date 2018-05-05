@@ -20,7 +20,7 @@ void format_time(char *buf, struct state *s)
 void format_date(char *buf, struct state *s)
 {
     int year = s->year;
-    char *year_prefix = "";
+    char *year_prefix = "  ";
 
     if (year < 0)
     {
