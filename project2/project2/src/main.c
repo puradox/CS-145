@@ -63,6 +63,9 @@ TIMER1_TICK()
         s.next_clock(&s);
         s.next_military(&s);
 
+        // Disable the cursor
+        disable_cursor();
+
         // Update the date
         pos_lcd(0, 0);
         format_date(date, &s);
@@ -72,6 +75,13 @@ TIMER1_TICK()
         pos_lcd(1, 0);
         format_time(time, &s);
         puts_lcd2(time);
+
+        // Enable the cursor
+        if (s.is_menu_on)
+        {
+            pos_lcd(s.cursor_row, s.cursor_col);
+            enable_cursor();
+        }
     }
     else
     {

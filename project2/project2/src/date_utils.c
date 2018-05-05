@@ -3,17 +3,19 @@
 
 void format_time(char *buf, struct state *s)
 {
+    char *setting = s->is_menu_on ? "MENU" : "    ";
+
     if (s->is_military_time)
     {
-        sprintf(buf, "%02d:%02d:%02d   ",
-                s->hour, s->minute, s->second);
+        sprintf(buf, "%02d:%02d:%02d    %s",
+                s->hour, s->minute, s->second, setting);
     }
     else
     {
         int hour = (s->hour % 12 == 0) ? 12 : (s->hour % 12);
         char *meridiem = (s->hour >= 12) ? "PM" : "AM";
-        sprintf(buf, "%2d:%02d:%02d %s",
-                hour, s->minute, s->second, meridiem);
+        sprintf(buf, "%2d:%02d:%02d %s %s",
+                hour, s->minute, s->second, meridiem, setting);
     }
 }
 

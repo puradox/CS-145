@@ -22,6 +22,9 @@ struct state make_state(state_fn *clock_start, state_fn *menu_start)
 
         // Menu
         KEY_NONE, // key_pressed
+        0, // is_menu_on
+        0, // cursor_row
+        0, // cursor_col
 
         // Military
         0, // is_military_time

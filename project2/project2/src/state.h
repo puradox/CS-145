@@ -37,6 +37,9 @@ struct state
     //
 
     enum key key_pressed;
+    char is_menu_on;
+    char cursor_row;
+    char cursor_col;
 
     //
     // Military (24-hour) time
