@@ -14,10 +14,10 @@ struct state make_state(state_fn *clock_start, state_fn *menu_start)
         // Clock
         0,    // ticks
         2018, // year
-        11,   // month
-        31,   // day
-        23,   // hour
-        59,   // minute
+        4,   // month
+        7,   // day
+        4,   // hour
+        20,   // minute
         0,    // second
 
         // Menu
