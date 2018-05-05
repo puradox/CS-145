@@ -29,7 +29,7 @@ void format_date(char *buf, struct state *s)
     }
 
     sprintf(buf, "%s %2d, %4d %s",
-            MONTHS[s->month], s->day, s->year);
+            MONTHS[s->month], s->day, year, year_prefix);
 }
 
 char is_leap_year(int year)
@@ -161,7 +161,7 @@ void decrement_hour(struct state *s)
     if (s->hour == -1)
     {
         decrement_day(s);
-        s->hour == 23;
+        s->hour = 23;
     }
 }
 
