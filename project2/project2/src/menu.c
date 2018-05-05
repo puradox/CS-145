@@ -4,6 +4,7 @@
 
 void menu_start(struct state *s)
 {
+    s->is_menu_on = 0;
     s->next_menu = edit_none;
 }
 
@@ -13,15 +14,19 @@ void edit_none(struct state *s)
     {
     case KEY_A:
         s->next_menu = edit_month_pressed;
+        s->is_menu_on = 0;
         break;
     case KEY_D:
         s->next_menu = edit_second_pressed;
+        s->is_menu_on = 0;
         break;
     }
 }
 
 void edit_none_pressed(struct state *s)
 {
+    s->is_menu_on = 0;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:
@@ -53,6 +58,9 @@ void edit_month(struct state *s)
 
 void edit_month_pressed(struct state *s)
 {
+    s->cursor_row = 0;
+    s->cursor_col = 2;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:
@@ -84,6 +92,9 @@ void edit_day(struct state *s)
 
 void edit_day_pressed(struct state *s)
 {
+    s->cursor_row = 0;
+    s->cursor_col = 5;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:
@@ -115,6 +126,9 @@ void edit_year(struct state *s)
 
 void edit_year_pressed(struct state *s)
 {
+    s->cursor_row = 0;
+    s->cursor_col = 11;
+
     switch (s->key_pressed)
     {
         case KEY_NONE:
@@ -146,6 +160,9 @@ void edit_hour(struct state *s)
 
 void edit_hour_pressed(struct state *s)
 {
+    s->cursor_row = 1;
+    s->cursor_col = 1;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:
@@ -177,6 +194,9 @@ void edit_minute(struct state *s)
 
 void edit_minute_pressed(struct state *s)
 {
+    s->cursor_row = 1;
+    s->cursor_col = 4;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:
@@ -208,6 +228,9 @@ void edit_second(struct state *s)
 
 void edit_second_pressed(struct state *s)
 {
+    s->cursor_row = 1;
+    s->cursor_col = 7;
+
     switch(s->key_pressed)
     {
         case KEY_NONE:

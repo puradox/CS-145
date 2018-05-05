@@ -3,7 +3,7 @@
 
 void format_time(char *buf, struct state *s)
 {
-    char *setting = s->is_menu_on ? "MENU" : "    ";
+    char *setting = s->is_menu_on ? "SET" : "   ";
 
     if (s->is_military_time)
     {
