@@ -5,7 +5,7 @@ void format_time(char *buf, struct state *s)
 {
     if (s->is_military_time)
     {
-        sprintf(buf, "%02d:%02d:%02d",
+        sprintf(buf, "%02d:%02d:%02d   ",
                 s->hour, s->minute, s->second);
     }
     else
@@ -19,7 +19,7 @@ void format_time(char *buf, struct state *s)
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s %d, %4d",
+    sprintf(buf, "%s %d, %4d ",
             MONTHS[s->month], s->day, s->year);
 }
 
