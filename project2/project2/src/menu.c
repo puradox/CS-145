@@ -14,11 +14,11 @@ void edit_none(struct state *s)
     {
     case KEY_A:
         s->next_menu = edit_month_pressed;
-        s->is_menu_on = 0;
+        s->is_menu_on = 1;
         break;
     case KEY_D:
         s->next_menu = edit_second_pressed;
-        s->is_menu_on = 0;
+        s->is_menu_on = 1;
         break;
     }
 }

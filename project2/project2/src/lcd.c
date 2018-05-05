@@ -124,7 +124,7 @@ void puts_lcd2(const char *s)
 
 void enable_cursor(void)
 {
-    write(0x0f, 0);
+    write(0x0e, 0);
 }
 
 void disable_cursor(void)
