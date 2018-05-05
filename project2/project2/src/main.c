@@ -46,6 +46,7 @@ TIMER1_TICK()
         // Run the finite state machines
         s.next_menu(&s);
         s.next_clock(&s);
+        s.next_military(&s);
 
         // Update the time
         pos_lcd(0, 0);
