@@ -43,11 +43,9 @@ void edit_month(struct state *s)
             s->next_menu = edit_day_pressed;
             break;
         case KEY_B:
-            s->next_menu = edit_month_pressed;
             increment_month(s);
             break;
         case KEY_C:
-            s->next_menu = edit_month_pressed;
             decrement_month(s);
             break;
         case KEY_D:
@@ -77,11 +75,9 @@ void edit_day(struct state *s)
             s->next_menu = edit_year_pressed;
             break;
         case KEY_B:
-            s->next_menu = edit_day_pressed;
             increment_day(s);
             break;
         case KEY_C:
-            s->next_menu = edit_day_pressed;
             decrement_day(s);
             break;
         case KEY_D:
@@ -111,11 +107,9 @@ void edit_year(struct state *s)
         s->next_menu = edit_hour_pressed;
         break;
     case KEY_B:
-        s->next_menu = edit_year_pressed;
         increment_year(s);
         break;
     case KEY_C:
-        s->next_menu = edit_year_pressed;
         decrement_year(s);
         break;
     case KEY_D:
@@ -145,11 +139,9 @@ void edit_hour(struct state *s)
         s->next_menu = edit_minute_pressed;
         break;
     case KEY_B:
-        s->next_menu = edit_hour_pressed;
         increment_hour(s);
         break;
     case KEY_C:
-        s->next_menu = edit_hour_pressed;
         decrement_hour(s);
         break;
     case KEY_D:
@@ -179,11 +171,9 @@ void edit_minute(struct state *s)
         s->next_menu = edit_second_pressed;
         break;
     case KEY_B:
-        s->next_menu = edit_minute_pressed;
         increment_minute(s);
         break;
     case KEY_C:
-        s->next_menu = edit_minute_pressed;
         decrement_minute(s);
         break;
     case KEY_D:
@@ -213,11 +203,9 @@ void edit_second(struct state *s)
         s->next_menu = edit_none_pressed;
         break;
     case KEY_B:
-        s->next_menu = edit_second_pressed;
         increment_second(s);
         break;
     case KEY_C:
-        s->next_menu = edit_second_pressed;
         decrement_second(s);
         break;
     case KEY_D:
