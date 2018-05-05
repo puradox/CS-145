@@ -5,6 +5,7 @@
 #include "keypad.h"
 #include "clock.h"
 #include "menu.h"
+#include "date_utils.h"
 #include "config.h"
 
 static const unsigned short CTC_MAX = 125 * 10 - 1;
