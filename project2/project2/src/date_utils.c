@@ -53,6 +53,17 @@ char days_in_month(int month, int year)
         return DAYS_PER_MONTH[month];
 }
 
+void leap_year_validate(struct state *s)
+{
+    // Make sure the day never extends over what the month allows.
+    // This is needed for leap years
+    int max_days = days_in_month(s->month, s->year);
+    if (s->day > max_days)
+    {
+        s->day = max_days;
+    }
+}
+
 //
 // Increment
 //
@@ -60,6 +71,7 @@ char days_in_month(int month, int year)
 void increment_year(struct state *s)
 {
     s->year++;
+    leap_year_validate(s);
 }
 
 void increment_month(struct state *s)
@@ -70,13 +82,7 @@ void increment_month(struct state *s)
         increment_year(s);
         s->month = 0;
     }
-
-    // Make sure the day never extends over what the month allows.
-    int max_days = days_in_month(s->month, s->year);
-    if (s->day > max_days)
-    {
-        s->day = max_days;
-    }
+    leap_year_validate(s);
 }
 
 void increment_day(struct state *s)
@@ -126,6 +132,7 @@ void increment_second(struct state *s)
 void decrement_year(struct state *s)
 {
     s->year--;
+    leap_year_validate(s);
 }
 
 void decrement_month(struct state *s)
@@ -136,13 +143,7 @@ void decrement_month(struct state *s)
         decrement_year(s);
         s->month = 11;
     }
-
-    // Make sure the day never extends over what the month allows.
-    int max_days = days_in_month(s->month, s->year);
-    if (s->day > max_days)
-    {
-        s->day = max_days;
-    }
+    leap_year_validate(s);
 }
 
 void decrement_day(struct state *s)
