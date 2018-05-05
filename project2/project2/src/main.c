@@ -1,3 +1,5 @@
+#include <avr/sleep.h>
+
 #include "avr.h"
 #include "lcd.h"
 #include "state.h"
@@ -11,24 +13,35 @@
 static const unsigned short CTC_MAX = 125 * 10 - 1;
 static struct state s;
 static char time[16], date[16];
+static char running;
 
 int main()
 {
     // Timer 0 used for initialization of LCD.
-    // Timer 1 used for the FSM loop.
+    // Timer 1 used for the FSM loop; uses interrupts
     // Timer 2 is not being used.
 
     // Initialization
     ini_avr();
     ini_lcd();
+    set_sleep_mode(SLEEP_MODE_IDLE);
+    running = 1;
 
     s = make_state(clock_start, menu_start);
     timer1_start(MS_PER_TICK);
+    sleep_enable();
 
-    for (;;)
+    while (running == 1)
     {
+        sleep_cpu();
     }
 
+    // Display error
+    clr_lcd();
+    pos_lcd(0, 0);
+    puts_lcd2("ERROR");
+
+    sleep_disable();
     timer1_stop();
     return 0;
 }
@@ -59,5 +72,9 @@ TIMER1_TICK()
         pos_lcd(1, 0);
         format_time(time, &s);
         puts_lcd2(time);
+    }
+    else
+    {
+        running = 0;
     }
 }
