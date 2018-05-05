@@ -149,10 +149,10 @@ void decrement_day(struct state *s)
 void decrement_hour(struct state *s)
 {
     s->hour--;
-    if (s->hour == 0)
+    if (s->hour == -1)
     {
         decrement_day(s);
-        s->hour == 24;
+        s->hour == 23;
     }
 }
 
@@ -169,7 +169,7 @@ void decrement_minute(struct state *s)
 void decrement_second(struct state *s)
 {
     s->second--;
-    if (s->minute == -1)
+    if (s->second == -1)
     {
         decrement_minute(s);
         s->second = 59;
