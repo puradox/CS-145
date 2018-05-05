@@ -221,6 +221,12 @@
     <Compile Include="src\menu.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\military.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\military.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\state.c">
       <SubType>compile</SubType>
     </Compile>
