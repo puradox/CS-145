@@ -19,7 +19,16 @@ void format_time(char *buf, struct state *s)
 
 void format_date(char *buf, struct state *s)
 {
-    sprintf(buf, "%s %d, %4d ",
+    int year = s->year;
+    char *year_prefix = "";
+
+    if (year < 0)
+    {
+        year = -year; // absolute value
+        year_prefix = "BC";
+    }
+
+    sprintf(buf, "%s %2d, %4d %s",
             MONTHS[s->month], s->day, s->year);
 }
 
