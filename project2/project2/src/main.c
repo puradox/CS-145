@@ -29,12 +29,13 @@ int main()
     {
     }
 
+    timer1_stop();
     return 0;
 }
 
 TIMER1_TICK()
 {
-    if (s.next_clock != 0 && s.next_menu != 0)
+    if (s.next_clock != 0 && s.next_menu != 0 && s.next_military != 0)
     {
         // Reset the Watchdog timer (expires in 2.1 seconds)
         // If anything takes too long, the Watchdog timer will restart
@@ -49,14 +50,14 @@ TIMER1_TICK()
         s.next_clock(&s);
         s.next_military(&s);
 
-        // Update the time
-        pos_lcd(0, 0);
-        format_time(time, &s);
-        puts_lcd2(time);
-
         // Update the date
-        pos_lcd(1, 0);
+        pos_lcd(0, 0);
         format_date(date, &s);
         puts_lcd2(date);
+
+        // Update the time
+        pos_lcd(1, 0);
+        format_time(time, &s);
+        puts_lcd2(time);
     }
 }
