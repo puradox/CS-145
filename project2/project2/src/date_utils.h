@@ -48,6 +48,9 @@ static const char MONTHS[12][4] = {
     "Dec",
 };
 
+void format_time(char *buf, struct state *s);
+void format_date(char *buf, struct state *s);
+
 char is_leap_year(int year);
 char days_in_month(int month, int year);
 

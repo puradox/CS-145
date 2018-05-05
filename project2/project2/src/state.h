@@ -14,13 +14,13 @@ struct state
 {
     state_fn *next_clock;
     state_fn *next_menu;
+    state_fn *next_military;
 
     //
     // Clock
     //
 
-    int counter;
-    char is_military_time;
+    int ticks;
 
     // Date
     int year;
@@ -37,6 +37,12 @@ struct state
     //
 
     enum key key_pressed;
+
+    //
+    // Military (24-hour) time
+    //
+
+    char is_military_time;
 };
 
 //
@@ -44,7 +50,5 @@ struct state
 //
 
 struct state make_state(state_fn *clock_start, state_fn *menu_start);
-void format_time(char *buf, struct state *s);
-void format_date(char *buf, struct state *s);
 
 #endif
