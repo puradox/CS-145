@@ -4,17 +4,17 @@
 
 void clock_start(struct state *s)
 {
-    s->counter = 0;
+    s->ticks = 0;
     s->next_clock = clock_tick;
 }
 
 void clock_tick(struct state *s)
 {
-    s->counter++;
+    s->ticks++;
 
-    if (s->counter >= TICKS_PER_SEC)
+    if (s->ticks >= TICKS_PER_SEC)
     {
         increment_second(s);
-        s->counter = 0;
+        s->ticks = 0;
     }
 }
