@@ -12,7 +12,7 @@ void edit_none(struct state *s)
     switch (s->key_pressed)
     {
     case KEY_A:
-        s->next_menu = edit_month;
+        s->next_menu = edit_second;
         break;
     }
 }
@@ -22,7 +22,7 @@ void edit_year(struct state *s)
     switch (s->key_pressed)
     {
     case KEY_A:
-        s->next_menu = edit_hour;
+        s->next_menu = edit_none;
         break;
     case KEY_B:
         increment_year(s);
@@ -31,7 +31,7 @@ void edit_year(struct state *s)
         decrement_year(s);
         break;
     case KEY_D:
-        s->next_menu = edit_none;
+        s->next_menu = edit_month;
         break;
     }
 }
@@ -41,7 +41,7 @@ void edit_month(struct state *s)
     switch (s->key_pressed)
     {
     case KEY_A:
-        s->next_menu = edit_day;
+        s->next_menu = edit_year;
         break;
     case KEY_B:
         increment_month(s);
@@ -50,7 +50,7 @@ void edit_month(struct state *s)
         decrement_month(s);
         break;
     case KEY_D:
-        s->next_menu = edit_none;
+        s->next_menu = edit_day;
         break;
     }
 }
