@@ -27,7 +27,7 @@ enum key get_key()
         for (int col = 0; col < 4; ++col)
         {
             if (is_pressed(row, col))
-                return (enum key)(row * 4 + col + 1);
+                return (enum key)(row * 4 + col);
         }
     }
     return KEY_NONE;

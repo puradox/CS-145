@@ -3,7 +3,8 @@
 
 enum key
 {
-    KEY_1 = 0,
+    KEY_NONE = -1,
+    KEY_1,
     KEY_2,
     KEY_3,
     KEY_A,
