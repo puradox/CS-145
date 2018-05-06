@@ -81,10 +81,13 @@ void increment_month(struct state *s)
     s->month++;
     if (s->month == 12)
     {
-        increment_year(s);
         s->month = 0;
+        increment_year(s);
     }
-    leap_year_validate(s);
+    else
+    {
+        leap_year_validate(s);
+    }
 }
 
 void increment_day(struct state *s)
@@ -92,8 +95,8 @@ void increment_day(struct state *s)
     s->day++;
     if (s->day == days_in_month(s->month, s->year) + 1)
     {
-        increment_month(s);
         s->day = 1;
+        increment_month(s);
     }
 }
 
@@ -102,8 +105,8 @@ void increment_hour(struct state *s)
     s->hour++;
     if (s->hour == 24)
     {
-        increment_day(s);
         s->hour = 0;
+        increment_day(s);
     }
 }
 
@@ -112,8 +115,8 @@ void increment_minute(struct state *s)
     s->minute++;
     if (s->minute == 60)
     {
-        increment_hour(s);
         s->minute = 0;
+        increment_hour(s);
     }
 }
 
@@ -122,8 +125,8 @@ void increment_second(struct state *s)
     s->second++;
     if (s->second == 60)
     {
-        increment_minute(s);
         s->second = 0;
+        increment_minute(s);
     }
 }
 
@@ -142,10 +145,13 @@ void decrement_month(struct state *s)
     s->month--;
     if (s->month == -1)
     {
-        decrement_year(s);
         s->month = 11;
+        decrement_year(s);
     }
-    leap_year_validate(s);
+    else
+    {
+        leap_year_validate(s);
+    }
 }
 
 void decrement_day(struct state *s)
@@ -163,8 +169,8 @@ void decrement_hour(struct state *s)
     s->hour--;
     if (s->hour == -1)
     {
-        decrement_day(s);
         s->hour = 23;
+        decrement_day(s);
     }
 }
 
@@ -173,8 +179,8 @@ void decrement_minute(struct state *s)
     s->minute--;
     if (s->minute == -1)
     {
-        decrement_hour(s);
         s->minute = 59;
+        decrement_hour(s);
     }
 }
 
@@ -183,7 +189,7 @@ void decrement_second(struct state *s)
     s->second--;
     if (s->second == -1)
     {
-        decrement_minute(s);
         s->second = 59;
+        decrement_minute(s);
     }
 }
