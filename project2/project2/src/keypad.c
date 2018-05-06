@@ -13,6 +13,13 @@ int is_pressed(int row, int col)
     return result ? 0 : 1;
 }
 
+int is_key_pressed(enum key k)
+{
+    int row = k / 4;
+    int col = k % 4;
+    return is_pressed(row, col);
+}
+
 enum key get_key()
 {
     for (int row = 0; row < 4; ++row)

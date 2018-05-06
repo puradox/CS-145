@@ -1,5 +1,4 @@
 #include "menu.h"
-#include "keypad.h"
 #include "date_utils.h"
 
 void menu_start(struct state *s)
@@ -10,16 +9,15 @@ void menu_start(struct state *s)
 
 void edit_none(struct state *s)
 {
-    switch (s->key_pressed)
+    if (s->A)
     {
-    case KEY_A:
         s->next_menu = edit_month_pressed;
         s->is_menu_on = 1;
-        break;
-    case KEY_D:
+    }
+    if (s->D)
+    {
         s->next_menu = edit_second_pressed;
         s->is_menu_on = 1;
-        break;
     }
 }
 
@@ -27,31 +25,20 @@ void edit_none_pressed(struct state *s)
 {
     s->is_menu_on = 0;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_none;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_none;
 }
 
 void edit_month(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-        case KEY_A:
-            s->next_menu = edit_day_pressed;
-            break;
-        case KEY_B:
-            increment_month(s);
-            break;
-        case KEY_C:
-            decrement_month(s);
-            break;
-        case KEY_D:
-            s->next_menu = edit_none_pressed;
-            break;
-    }
+    if (s->A)
+        s->next_menu = edit_day_pressed;
+    if (s->B)
+        increment_month(s);
+    if (s->C)
+        decrement_month(s);
+    if (s->D)
+        s->next_menu = edit_none_pressed;
 }
 
 void edit_month_pressed(struct state *s)
@@ -59,31 +46,20 @@ void edit_month_pressed(struct state *s)
     s->cursor_row = 0;
     s->cursor_col = 2;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_month;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_month;
 }
 
 void edit_day(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-        case KEY_A:
-            s->next_menu = edit_year_pressed;
-            break;
-        case KEY_B:
-            increment_day(s);
-            break;
-        case KEY_C:
-            decrement_day(s);
-            break;
-        case KEY_D:
-            s->next_menu = edit_month_pressed;
-            break;
-    }
+    if (s->A)
+        s->next_menu = edit_year_pressed;
+    if (s->B)
+        increment_day(s);
+    if (s->C)
+        decrement_day(s);
+    if (s->D)
+        s->next_menu = edit_month_pressed;
 }
 
 void edit_day_pressed(struct state *s)
@@ -91,31 +67,20 @@ void edit_day_pressed(struct state *s)
     s->cursor_row = 0;
     s->cursor_col = 5;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_day;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_day;
 }
 
 void edit_year(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-    case KEY_A:
+    if (s->A)
         s->next_menu = edit_hour_pressed;
-        break;
-    case KEY_B:
+    if (s->B)
         increment_year(s);
-        break;
-    case KEY_C:
+    if (s->C)
         decrement_year(s);
-        break;
-    case KEY_D:
+    if (s->D)
         s->next_menu = edit_day_pressed;
-        break;
-    }
 }
 
 void edit_year_pressed(struct state *s)
@@ -123,31 +88,20 @@ void edit_year_pressed(struct state *s)
     s->cursor_row = 0;
     s->cursor_col = 11;
 
-    switch (s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_year;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_year;
 }
 
 void edit_hour(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-    case KEY_A:
+    if (s->A)
         s->next_menu = edit_minute_pressed;
-        break;
-    case KEY_B:
+    if (s->B)
         increment_hour(s);
-        break;
-    case KEY_C:
+    if (s->C)
         decrement_hour(s);
-        break;
-    case KEY_D:
+    if (s->D)
         s->next_menu = edit_year_pressed;
-        break;
-    }
 }
 
 void edit_hour_pressed(struct state *s)
@@ -155,31 +109,20 @@ void edit_hour_pressed(struct state *s)
     s->cursor_row = 1;
     s->cursor_col = 1;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_hour;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_hour;
 }
 
 void edit_minute(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-    case KEY_A:
+    if (s->A)
         s->next_menu = edit_second_pressed;
-        break;
-    case KEY_B:
+    if (s->B)
         increment_minute(s);
-        break;
-    case KEY_C:
+    if (s->C)
         decrement_minute(s);
-        break;
-    case KEY_D:
+    if (s->D)
         s->next_menu = edit_hour_pressed;
-        break;
-    }
 }
 
 void edit_minute_pressed(struct state *s)
@@ -187,31 +130,20 @@ void edit_minute_pressed(struct state *s)
     s->cursor_row = 1;
     s->cursor_col = 4;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_minute;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_minute;
 }
 
 void edit_second(struct state *s)
 {
-    switch (s->key_pressed)
-    {
-    case KEY_A:
+    if (s->A)
         s->next_menu = edit_none_pressed;
-        break;
-    case KEY_B:
+    if (s->B)
         increment_second(s);
-        break;
-    case KEY_C:
+    if (s->C)
         decrement_second(s);
-        break;
-    case KEY_D:
+    if (s->D)
         s->next_menu = edit_minute_pressed;
-        break;
-    }
 }
 
 void edit_second_pressed(struct state *s)
@@ -219,10 +151,6 @@ void edit_second_pressed(struct state *s)
     s->cursor_row = 1;
     s->cursor_col = 7;
 
-    switch(s->key_pressed)
-    {
-        case KEY_NONE:
-            s->next_menu = edit_second;
-            break;
-    }
+    if (!s->A && !s->B)
+        s->next_menu = edit_second;
 }
