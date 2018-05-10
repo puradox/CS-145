@@ -2,7 +2,6 @@
 #include "clock.h"
 #include "menu.h"
 #include "military.h"
-#include "keypad.h"
 
 struct state make_state(state_fn *clock_start, state_fn *menu_start)
 {
@@ -21,12 +20,16 @@ struct state make_state(state_fn *clock_start, state_fn *menu_start)
         0,    // second
 
         // Menu
-        KEY_NONE, // key_pressed
+        0, // A
+        0, // B
+        0, // C
+        0, // D
         0, // is_menu_on
         0, // cursor_row
         0, // cursor_col
 
         // Military
+        0, // key_point
         0, // is_military_time
     };
     return s;

@@ -3,7 +3,7 @@
 
 enum key
 {
-    KEY_NONE = 0,
+    KEY_NONE = -1,
     KEY_1,
     KEY_2,
     KEY_3,
@@ -23,6 +23,7 @@ enum key
 };
 
 int is_pressed(int row, int col);
+int is_key_pressed(enum key k);
 enum key get_key(void);
 
 #endif

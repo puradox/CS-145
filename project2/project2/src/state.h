@@ -1,8 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "keypad.h"
-
 //
 // Data types
 //
@@ -36,7 +34,10 @@ struct state
     // Menu
     //
 
-    enum key key_pressed;
+    char A; // is A being pressed?
+    char B; // is B being pressed?
+    char C; // is C being pressed?
+    char D; // is D being pressed?
     char is_menu_on;
     char cursor_row;
     char cursor_col;
@@ -45,6 +46,7 @@ struct state
     // Military (24-hour) time
     //
 
+    char pound; // is the pound button being pressed?
     char is_military_time;
 };
 

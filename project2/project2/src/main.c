@@ -56,7 +56,11 @@ TIMER1_TICK()
         asm volatile("wdr" ::);
 
         // Reset the keypad input
-        s.key_pressed = get_key();
+        s.A = is_key_pressed(KEY_A);
+        s.B = is_key_pressed(KEY_B);
+        s.C = is_key_pressed(KEY_C);
+        s.D = is_key_pressed(KEY_D);
+        s.pound = is_key_pressed(KEY_POUND);
 
         // Run the finite state machines
         s.next_menu(&s);
