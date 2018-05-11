@@ -9,10 +9,7 @@
 #define RW_PIN 1
 #define EN_PIN 2
 
-#define SET_BIT(p, i) ((p) |= (1 << (i)))
-#define CLR_BIT(p, i) ((p) &= ~(1 << (i)))
-#define GET_BIT(p, i) ((p) & (1 << (i)))
-#define write(dest, dest_i, src, src_i) GET_BIT(src, src_i) ? SET_BIT(dest, dest_i) : CLR_BIT(dest, dest_i)
+#define WRITE_BIT(dest, dest_i, src, src_i) GET_BIT(src, src_i) ? SET_BIT(dest, dest_i) : CLR_BIT(dest, dest_i)
 
 static inline void
 set_data(unsigned char x)
@@ -20,18 +17,18 @@ set_data(unsigned char x)
     // TODO(Sam): Test this code
 
     // Write x to certain B and D ports
-    write(PORTB, 3, x, 0);
-    write(PORTB, 4, x, 1);
-    write(PORTD, 0, x, 2);
-    write(PORTD, 1, x, 3);
-    write(PORTD, 2, x, 4);
-    write(PORTD, 3, x, 5);
-    write(PORTD, 6, x, 6);
-    write(PORTD, 7, x, 7);
+    WRITE_BIT(PORTB, 3, x, 0);
+    WRITE_BIT(PORTB, 4, x, 1);
+    WRITE_BIT(PORTD, 0, x, 2);
+    WRITE_BIT(PORTD, 1, x, 3);
+    WRITE_BIT(PORTD, 2, x, 4);
+    WRITE_BIT(PORTD, 3, x, 5);
+    WRITE_BIT(PORTD, 6, x, 6);
+    WRITE_BIT(PORTD, 7, x, 7);
 
     // Program certain B and D ports to output
-    DDRB |= _BV(DDRB3) | _BV(DDRB4);
-    DDRD |= ~(_BV(DDRD4) | _BV(DDRD5)); // Skip over OC1B and OC1A
+    DDRB |= _BV(3) | _BV(4);
+    DDRD |= ~(_BV(4) | _BV(5)); // Skip over OC1B and OC1A
 }
 
 static inline unsigned char
