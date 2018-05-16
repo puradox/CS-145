@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "musical_notes.h"
 
 //
 // Data types
@@ -17,8 +18,17 @@ struct state
     bool running;
 
     // Music player
+    uint16_t tempo;
     uint16_t volume;
-    uint16_t bpm;
+    musical_note *song;
+    uint16_t song_len;
+    char *song_title;
+
+    // Menu
+    bool A;
+    bool B;
+    bool C;
+    bool D;
 };
 
 //

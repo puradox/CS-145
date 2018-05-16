@@ -17,17 +17,16 @@ enum timer_frequency
     CLK_DIVIDED_BY_1024,
 };
 
-// TODO(Sam): Finish this when you need to use this timer.
 //
 // 8-bit Timer/Counter 0
-// Recommended to set the timer between 1 and 2047 microseconds.
-// Set the timer in multiples of 8 for the best accuracy.
 //
-// timer0_start(unsigned short us);
-// timer0_stop();
+// Clocked at 16ms per tick
 //
-// #define TIMER0_TICK() ISR(TIMER0_COMPA_vect)
-//
+void timer0_start(void);
+void timer0_stop(void);
+
+#define TIMER0_TICK() ISR(TIMER0_COMPA_vect)
+
 
 //
 // 16-bit Timer/Counter 1

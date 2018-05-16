@@ -6,18 +6,18 @@
 // Tempo Placeholder
 #define TEMPO_DEFAULT 100
 
-struct musical_note
+typedef struct
 {
     uint16_t freq; // timer1 TOP value
     uint16_t dur;  // in milliseconds
-};
+} musical_note;
 
 #define SONG(notes...) \
     {                  \
         notes          \
     }
 #define MUSICAL_NOTE(note, duration) \
-    (struct musical_note) { NOTE##note, duration }
+    musical_note { NOTE##note, duration }
 
 // Note Types
 

@@ -14,7 +14,7 @@ void audio_off(void)
     TCCR1B &= ~(_BV(CS11) | _BV(CS10)); // stop timer1
 }
 
-void play_freq(uint16_t freq, uint16_t volume)
+void play_freq(uint16_t freq, uint8_t volume)
 {
     ICR1 = freq;
     OCR1A = freq * ((double)volume / 256.0);

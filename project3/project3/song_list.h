@@ -3,6 +3,13 @@
 
 #include "musical_notes.h"
 
+typedef struct
+{
+    char* title;
+    uint16_t notes_len;
+    musical_note notes[];
+} song_list;
+
 #define NO_SOUND
 
 #define COIN_SOUND \
