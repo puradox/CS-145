@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "state.h"
 #include "timer.h"
+#include "musical_notes.h"
 
 static struct state s;
 static char running;
@@ -22,17 +23,17 @@ int main(void)
     ini_lcd();
     running = 1;
 	
-	DDRD |= (1 << 5);
-	PORTD |= (1 <<5);
 
     timer0_start(); // Ticks every 16ms
     audio_on();
 
     s = make_state(menu_start);
-    play_freq(440, 255);
-	        // Update the song
-	        pos_lcd(0, 0);
-	        puts_lcd2("Who dis?");
+	
+	
+    play_freq(NOTE_C5, 200);
+	play_freq(NOTE_A4, 200);
+
+	
     while (running == 1)
     {
     }
@@ -42,7 +43,7 @@ int main(void)
     pos_lcd(0, 0);
     puts_lcd2("ERROR");
 
-    timer1_stop();
+    timer0_stop();
     return 0;
 }
 
@@ -62,7 +63,9 @@ TIMER0_TICK()
         // Run the finite state machines
         s.next(&s);
 
-
+		// Update the song
+		pos_lcd(0, 0);
+		puts_lcd2("Who dis?2");
     }
     else
     {
