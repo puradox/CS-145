@@ -27,7 +27,7 @@ void timer0_start(void)
     // Configure timer
     TCCR0 |= _BV(WGM01);          // Enable CTC mode
     OCR0 = 124;                   // Set CTC compare value at 16ms per tick
-    TCCR0 |= CLK_DIVIDED_BY_1024; // Start timer at Fcpu/64
+    TCCR0 |= CLK_DIVIDED_BY_1024; // Start timer at Fcpu/1024
 }
 
 void timer0_stop(void)
