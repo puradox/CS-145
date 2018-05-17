@@ -22,18 +22,14 @@ int main(void)
     ini_avr();
     ini_lcd();
     running = 1;
-	
 
+    s = make_state();
     timer0_start(); // Ticks every 16ms
     audio_on();
 
-    s = make_state(menu_start);
-	
-	
     play_freq(NOTE_C5, 200);
 	play_freq(NOTE_A4, 200);
 
-	
     while (running == 1)
     {
     }
@@ -49,7 +45,7 @@ int main(void)
 
 TIMER0_TICK()
 {
-    if (s.next != 0)
+    if (s.next_song && s.next_volume && s.next_tempo && s.next_player)
     {
         // Reset the Watchdog timer (expires in 2.1 seconds)
         wdt_reset();
@@ -59,13 +55,14 @@ TIMER0_TICK()
         s.B = is_key_pressed(KEY_B);
         s.C = is_key_pressed(KEY_C);
         s.D = is_key_pressed(KEY_D);
+        s.star = is_key_pressed(KEY_STAR);
+        s.pound = is_key_pressed(KEY_POUND);
 
         // Run the finite state machines
-        s.next(&s);
-
-		// Update the song
-		pos_lcd(0, 0);
-		puts_lcd2("Who dis?2");
+        s.next_song(&s);
+        s.next_volume(&s);
+        s.next_tempo(&s);
+        s.next_player(&s);
     }
     else
     {
