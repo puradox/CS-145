@@ -14,7 +14,13 @@ typedef void state_fn(struct state *);
 
 struct state
 {
-    state_fn *next;
+    state_fn *menu_next;
+	state_fn *player_next;
+	state_fn *song_player;
+
+	musical_note current_note;
+	
+	
     bool running;
 
     // Music player
@@ -35,6 +41,7 @@ struct state
 // Functions
 //
 
-struct state make_state(state_fn *start);
+struct state make_state(state_fn *menu_start,state_fn *player_start);
+void playing(struct state*);
 
 #endif

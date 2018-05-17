@@ -26,13 +26,10 @@ int main(void)
 
     timer0_start(); // Ticks every 16ms
     audio_on();
+void menu_start(struct state *);
 
-    s = make_state(menu_start);
+    s = make_state(menu_start, playing);
 	
-	
-    play_freq(NOTE_C5, 200);
-	play_freq(NOTE_A4, 200);
-
 	
     while (running == 1)
     {
@@ -49,7 +46,7 @@ int main(void)
 
 TIMER0_TICK()
 {
-    if (s.next != 0)
+    if (true/*s.next != 0*/)
     {
         // Reset the Watchdog timer (expires in 2.1 seconds)
         wdt_reset();
@@ -61,7 +58,7 @@ TIMER0_TICK()
         s.D = is_key_pressed(KEY_D);
 
         // Run the finite state machines
-        s.next(&s);
+        s.player_next(&s);
 
 		// Update the song
 		pos_lcd(0, 0);
