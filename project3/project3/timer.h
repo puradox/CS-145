@@ -25,7 +25,7 @@ enum timer_frequency
 void timer0_start(void);
 void timer0_stop(void);
 
-#define TIMER0_TICK() ISR(TIMER0_COMPA_vect)
+#define TIMER0_TICK() ISR(TIMER0_COMP_vect)
 
 
 //
@@ -46,7 +46,7 @@ void timer1_stop(void);
 void timer2_start(void);
 void timer2_stop(void);
 
-#define TIMER2_TICK() ISR(TIMER2_COMPA_vect)
+#define TIMER2_TICK() ISR(TIMER2_COMP_vect)
 
 
 #endif
