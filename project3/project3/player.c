@@ -18,13 +18,13 @@ void player_start(struct state* s)
 	{
 		s->note_index = 0;
 		s->note_duration_played = 0;
-		s->song_index = ((s->song_index+1) % song_list->length);
+		s->song_index = ((s->song_index+1) % s->song_list[s->song_index].length);
 	}
 	if (s->star)
 	{
 		s->note_index = 0;
 		s->note_duration_played = 0;
-		s->note_index = ((s->song_index - 1) % song_list->length);
+		s->note_index = ((s->song_index - 1) % s->song_list[s->song_index].length);
 	}
 }
 
