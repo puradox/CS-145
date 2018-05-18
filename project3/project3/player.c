@@ -14,12 +14,13 @@ bool end_of_song(struct state* s)
 void player_start(struct state* s)
 {
 	s->note_index = 0;
-	if (s->pound) 
+	/*
+	if (s->pound)
 	{
 		s->note_index = 0;
 		s->note_duration_played = 0;
 		s->song_index = ((s->song_index+1) % s->song_list[s->song_index].length);
-		
+
 	}
 	if (s->star)
 	{
@@ -27,6 +28,7 @@ void player_start(struct state* s)
 		s->note_duration_played = 0;
 		s->note_index = ((s->song_index - 1) % s->song_list[s->song_index].length);
 	}
+	 */
 }
 
 
