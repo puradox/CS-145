@@ -29,8 +29,8 @@ struct state
     uint16_t song_list_len;
     uint8_t song_index;
 
-	int note_duration_played;
 	int note_index;
+	int note_duration_played;
 
     // Input
     bool A;     // volume up

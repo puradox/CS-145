@@ -20,13 +20,21 @@ void song_none_pressed(struct state *s)
 {
     if (s->pound)
     {
-        // TODO(Sam): Next song
         s->next_song = song_next_pressed;
+        s->song_index = (s->song_index + 1) % s->song_list_len;
+        render_song_title(s->song_list[s->song_index].title);
+
+        s->note_index = 0;
+        s->note_duration_played = 0;
     }
     else if (s->star)
     {
-        // TODO(Sam): Previous song
         s->next_song = song_prev_pressed;
+        s->song_index = (s->song_index - 1) % s->song_list_len;
+        render_song_title(s->song_list[s->song_index].title);
+
+        s->note_index = 0;
+        s->note_duration_played = 0;
     }
 }
 void song_next_pressed(struct state *s)

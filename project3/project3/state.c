@@ -19,8 +19,8 @@ struct state make_state()
         .song_list_len = sizeof(song_list) / sizeof(song),
         .song_index = 0,
 
-		.note_duration_played = 0,
 		.note_index = 0,
+		.note_duration_played = 0,
 
         // Menu
         .A = false,
