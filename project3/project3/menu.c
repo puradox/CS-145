@@ -66,7 +66,7 @@ char volume_text[8];
 
 void render_volume(uint16_t volume)
 {
-    sprintf(volume_text, "Vol %2u", volume);
+    sprintf(volume_text, "Vol %-2u", volume);
     pos_lcd(1, 0);
     puts_lcd2(volume_text);
 }
@@ -108,7 +108,7 @@ char tempo_text[8];
 
 void render_tempo(uint16_t tempo)
 {
-    sprintf(tempo_text, "/ BPM %3u", tempo);
+    sprintf(tempo_text, "/ BPM %-3u", tempo);
     pos_lcd(1, 7);
     puts_lcd2(tempo_text);
 }
