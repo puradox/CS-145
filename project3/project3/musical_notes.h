@@ -3,8 +3,6 @@
 
 #include <stdint.h>
 
-// Tempo Placeholder
-#define TEMPO_DEFAULT 100
 
 typedef struct
 {
@@ -15,6 +13,18 @@ typedef struct
 #define MUSICAL_NOTE(note, duration) \
     {                                \
         NOTE_##note, duration        \
+    }
+
+typedef struct
+{
+    const char *title;
+    const uint8_t length;
+    const musical_note *notes;
+} song;
+
+#define SONG(title, notes)                                   \
+    {                                                        \
+        title, (sizeof(notes) / sizeof(musical_note)), notes \
     }
 
 // Note Types

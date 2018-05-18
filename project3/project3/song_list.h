@@ -3,19 +3,7 @@
 
 #include "musical_notes.h"
 
-typedef struct
-{
-    const char *title;
-    const uint8_t length;
-    const musical_note *notes;
-} song;
-
-#define SONG(title, notes)                                   \
-    {                                                        \
-        title, (sizeof(notes) / sizeof(musical_note)), notes \
-    }
-
-const musical_note song_overwatch_theme[] = {
+static const musical_note song_overwatch_theme[] = {
     HD_NOTE(A4),
     Q__NOTE(E4),
     Q__NOTE(A4),
@@ -25,7 +13,7 @@ const musical_note song_overwatch_theme[] = {
     W__NOTE(CS5),
 };
 
-const musical_note song_mario_theme[] = {
+static const musical_note song_mario_theme[] = {
     Q__NOTE(E5),
     H__NOTE(E5),
     H__NOTE(E5),
@@ -35,7 +23,7 @@ const musical_note song_mario_theme[] = {
     Q__NOTE(G4),
 };
 
-const musical_note song_mario_gameover[] = {
+static const musical_note song_mario_gameover[] = {
     HD_NOTE(C5),
     HD_NOTE(G4),
     H__NOTE(E4),
@@ -48,7 +36,7 @@ const musical_note song_mario_gameover[] = {
     WD_NOTE(G4),
 };
 
-const musical_note song_doom[] = {
+static const musical_note song_doom[] = {
     Q__NOTE(E3),
     Q__NOTE(E3),
     Q__NOTE(E4),
@@ -79,7 +67,7 @@ const musical_note song_doom[] = {
     H__NOTE(BF3),
 };
 
-const musical_note song_disney[] = {
+static const musical_note song_disney[] = {
     H__NOTE(G3),
     H__NOTE(G4),
     H__NOTE(F4),
@@ -107,7 +95,7 @@ const musical_note song_disney[] = {
     W__NOTE(C4),
 };
 
-const musical_note song_number_one[] = {
+static const musical_note song_number_one[] = {
     HD_NOTE(F4),
     Q__NOTE(C5),
     E__NOTE(B4),
@@ -132,7 +120,7 @@ const musical_note song_number_one[] = {
     H__NOTE(C5),
 };
 
-song song_list[] = {
+static const song song_list[] = {
     SONG("Mario theme", song_mario_theme),
     SONG("Mario gameover", song_mario_gameover),
 };
