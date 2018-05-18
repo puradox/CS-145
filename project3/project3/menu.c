@@ -63,7 +63,7 @@ char volume_text[8];
 
 void render_volume(uint16_t volume)
 {
-    sprintf(volume_text, "Vol %d", volume);
+    sprintf(volume_text, "Vol %2u", volume);
     pos_lcd(1, 0);
     puts_lcd2(volume_text);
 }
@@ -77,12 +77,14 @@ void volume_none_pressed(struct state *s)
 {
     if (s->A)
     {
-        render_volume(++s->volume);
+        if (s->volume < 10)
+            render_volume(++s->volume);
         s->next_volume = volume_up_pressed;
     }
     else if (s->B)
     {
-        render_volume(--s->volume);
+        if (s->volume > 0)
+            render_volume(--s->volume);
         s->next_volume = volume_down_pressed;
     }
 }
@@ -103,7 +105,7 @@ char tempo_text[8];
 
 void render_tempo(uint16_t tempo)
 {
-    sprintf(tempo_text, "BPM %d", tempo);
+    sprintf(tempo_text, "BPM %3u", tempo);
     pos_lcd(1, 7);
     puts_lcd2(tempo_text);
 }
@@ -117,12 +119,14 @@ void tempo_none_pressed(struct state *s)
 {
     if (s->C)
     {
-        render_tempo(++s->tempo);
+        if (s->tempo < 180)
+            render_tempo(++s->tempo);
         s->next_tempo = tempo_up_pressed;
     }
     else if (s->D)
     {
-        render_tempo(--s->tempo);
+        if (s->tempo > 60)
+            render_tempo(--s->tempo);
         s->next_tempo = tempo_down_pressed;
     }
 }
