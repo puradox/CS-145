@@ -24,13 +24,8 @@ int main(void)
     running = 1;
 
     s = make_state();
-    timer0_start(); // Ticks every 16ms
+    timer2_start(); // Ticks every 16ms
     audio_on();
-	
-void menu_start(struct state *);
-
-    play_freq(NOTE_C5, 200);
-	play_freq(NOTE_A4, 200);
 
     while (running == 1)
     {
@@ -41,11 +36,11 @@ void menu_start(struct state *);
     pos_lcd(0, 0);
     puts_lcd2("ERROR");
 
-    timer0_stop();
+    timer2_stop();
     return 0;
 }
 
-TIMER0_TICK()
+TIMER2_TICK()
 {
     if (s.next_song && s.next_volume && s.next_tempo && s.next_player)
     {

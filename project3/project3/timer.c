@@ -67,5 +67,30 @@ void timer1_stop()
 //
 // 8-bit Timer/Counter 2
 //
-// TODO
-//
+
+void timer2_start(void)
+{
+    // Configure interrupts
+    TIMSK |= _BV(OCIE2); // Enable CTC interrupt
+    sei();               // Enable global interrupts
+
+    //
+    // Calculating the CTC compare value (OCR1A)
+    //
+    // CPU_FREQ / PRESCALER / MILLISECONDS_IN_SECOND * ms - 1
+    // 8,000,000 / 1024 / 1,000 * ms - 1
+    // 125 / 16 * ms - 1
+    // 125 - 1 where ms = 16
+    // 124
+    //
+
+    // Configure timer
+    TCCR2 |= _BV(WGM21);          // Enable CTC mode
+    OCR2 = 124;                   // Set CTC compare value at 16ms per tick
+    TCCR2 |= CLK_DIVIDED_BY_1024; // Start timer at Fcpu/1024
+}
+
+void timer2_stop(void)
+{
+    TCCR2 &= ~CLK_DIVIDED_BY_1024; // Clock Select
+}

@@ -43,10 +43,10 @@ void timer1_stop(void);
 // Recommended to set the timer between 1 and 2047 microseconds.
 // Set the timer in multiples of 8 for the best accuracy.
 //
-// timer2_start(unsigned short us);
-// timer2_stop();
-//
-// #define TIMER2_TICK() ISR(TIMER2_COMPA_vect)
-//
+void timer2_start(void);
+void timer2_stop(void);
+
+#define TIMER2_TICK() ISR(TIMER2_COMPA_vect)
+
 
 #endif

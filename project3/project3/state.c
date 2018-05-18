@@ -14,7 +14,7 @@ struct state make_state()
 
         // Music player
         .tempo = 128,
-        .volume = 128,
+        .volume = 5,
         .song_list = song_list,
         .song_list_len = sizeof(song_list) / sizeof(song),
         .song_index = 0,
