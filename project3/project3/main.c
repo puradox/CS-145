@@ -26,6 +26,8 @@ int main(void)
     s = make_state();
     timer0_start(); // Ticks every 16ms
     audio_on();
+	
+void menu_start(struct state *);
 
     play_freq(NOTE_C5, 200);
 	play_freq(NOTE_A4, 200);

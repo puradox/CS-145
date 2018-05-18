@@ -175,6 +175,12 @@
     <Compile Include="musical_notes.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="player.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="player.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="song_list.h">
       <SubType>compile</SubType>
     </Compile>
