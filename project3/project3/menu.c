@@ -6,10 +6,13 @@
 
 // Song FSM
 
+char song_text[16];
+
 void render_song_title(char title[16])
 {
+    sprintf(song_text, "%15s", title);
     pos_lcd(0, 0);
-    puts_lcd2(title);
+    puts_lcd2(song_text);
 }
 
 void song_start(struct state *s)
@@ -106,7 +109,7 @@ char tempo_text[8];
 void render_tempo(uint16_t tempo)
 {
     sprintf(tempo_text, "BPM %3u", tempo);
-    pos_lcd(1, 7);
+    pos_lcd(1, 8);
     puts_lcd2(tempo_text);
 }
 
