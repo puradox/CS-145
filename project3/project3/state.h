@@ -11,7 +11,7 @@
 
 struct state;
 typedef void state_fn(struct state *);
-void state_fn_todo(struct state *s) {}
+// void state_fn_todo(struct state *s) {} ?
 
 struct state
 {
@@ -29,6 +29,13 @@ struct state
     musical_note *song;
     uint16_t song_len;
     char *song_title;
+	
+	int note_duration_played;
+	int note_index;
+	
+	song mario;
+	int mario_length;
+
 
     // Input
     bool A;     // volume up
@@ -43,8 +50,7 @@ struct state
 // Functions
 //
 
-struct state make_state(state_fn *menu_start,state_fn *player_start);
-void playing(struct state*);
+struct state make_state();
 
 
 #endif

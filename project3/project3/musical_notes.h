@@ -57,6 +57,7 @@ typedef struct
 // freq = f_clk / (2 * prescaler * TOP)
 // TOP = 62500 / freq (prescaler = 64)
 
+#define NOTE_REST 0
 #define NOTE_C0 3822
 #define NOTE_CS0 3608
 #define NOTE_D0 3405

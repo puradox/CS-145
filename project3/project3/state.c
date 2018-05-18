@@ -1,52 +1,30 @@
 #include "state.h"
 #include "menu.h"
+#include "player.h"
 
-/*
-void play(struct state* s)
-{
-	if (s->playing) // playing should be a state
-	{
-		if (s->time_note_played < note_duration)
-		{
-			play(s->current_note);
-		}
-		else
-		{
-			if (end_of_song())
-			{
-				state = done_with_song; // get outta here
-			}
-			else
-			{
-				s->index++;
-				s->current_note = SONG[s->index];
-			}
-		}
-	}
-}
-*/
-
-void playing(struct state* s)
-{
-	//play_freq(s->current_note.freq);
-}
-
-
-struct state make_state(state_fn *menu_start, state_fn *player_start)
+struct state make_state()
 {
     struct state s = {
 
         .next_song = song_start,
         .next_volume = volume_start,
         .next_tempo = tempo_start,
-        .next_player = state_fn_todo,
+        .next_player = song_start,
 
         // Music player
         .tempo = 128,
         .volume = 128,
-        .song = 0,
+        .song = -1,
         .song_len = 0,
         .song_title = "catch me outside",
+		
+		.note_duration_played = 0,
+		.note_index = 0,
+		
+		// 1 line ---> 4 beats
+		.mario = SONG(EIGHTH_NOTE(MUSICAL_NOTE(E5, 8)), MUSICAL_NOTE(E5, 8)), MUSICAL_NOTE(E5, 8), MUSICAL_NOTE(REST, 8),
+		MUSICAL_NOTE(G5, 4), MUSICAL_NOTE(REST, 4), MUSICAL_NOTE(G4, 4), MUSICAL_NOTE(REST, 4)),
+		.mario_length = 8,
 
         // Menu
         .A = false,
