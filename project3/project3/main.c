@@ -42,24 +42,34 @@ int main(void)
 
 TIMER2_TICK()
 {
-    if (s.next_song && s.next_volume && s.next_tempo && s.next_player)
+	pos_lcd(0, 0);
+
+	puts_lcd2("SKKRRRRT");
+	
+    if (s.next_song != 0 && s.next_volume != 0 && s.next_tempo != 0 && s.next_player!= 0)
     {
         // Reset the Watchdog timer (expires in 2.1 seconds)
         wdt_reset();
 
-        // Reset the keypad input
+        /*
+		// Reset the keypad input
         s.A = is_key_pressed(KEY_A);
         s.B = is_key_pressed(KEY_B);
         s.C = is_key_pressed(KEY_C);
         s.D = is_key_pressed(KEY_D);
         s.star = is_key_pressed(KEY_STAR);
         s.pound = is_key_pressed(KEY_POUND);
+		
+		
+*/
 
+
+		
         // Run the finite state machines
-        s.next_song(&s);
-        s.next_volume(&s);
-        s.next_tempo(&s);
-        s.next_player(&s);
+        //s.next_song(&s);
+        //s.next_volume(&s);
+        //s.next_tempo(&s);
+        //s.next_player(&s);
     }
     else
     {
