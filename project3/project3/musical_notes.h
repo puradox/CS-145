@@ -12,11 +12,6 @@ typedef struct
     uint16_t time_scaler; // divides length of beat
 } musical_note;
 
-#define SONG(notes...) \
-    {                  \
-        notes          \
-    }
-
 #define MUSICAL_NOTE(note, duration) \
     {                                \
         NOTE_##note, duration        \
