@@ -3,9 +3,10 @@
 
 #include "state.h"
 
+int note_duration_to_ms(int bpm, int scaler);
+bool end_of_song(struct state* s);
 void player_start(struct state *);
-
-void play(struct state*);
+void play_song(struct state*);
 
 /*
 void song_start(struct state *);
