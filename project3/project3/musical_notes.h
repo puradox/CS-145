@@ -17,7 +17,7 @@ typedef struct
 
 typedef struct
 {
-    const char *title;
+    const char title[16];
     const uint8_t length;
     const musical_note *notes;
 } song;

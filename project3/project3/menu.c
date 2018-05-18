@@ -5,7 +5,7 @@
 
 // Song FSM
 
-void render_song_title(char* title)
+void render_song_title(char title[16])
 {
     pos_lcd(0, 0);
     puts_lcd2(title);
@@ -42,11 +42,11 @@ void song_prev_pressed(struct state *s)
 
 // Volume FSM
 
-char *volume_text;
+char volume_text[8];
 
 void render_volume(uint16_t volume)
 {
-    sprintf(volume_text, "Vol %d/10", volume);
+    sprintf(volume_text, "Vol %d", volume);
     pos_lcd(1, 0);
     puts_lcd2(volume_text);
 }
@@ -82,7 +82,7 @@ void volume_down_pressed(struct state *s)
 
 // Tempo
 
-char *tempo_text;
+char tempo_text[8];
 
 void render_tempo(uint16_t tempo)
 {
