@@ -11,7 +11,7 @@ void render_song_title(char* title)
 
 void song_start(struct state *s)
 {
-    render_song_title(s->song_title);
+    render_song_title(s->song_list[s->song_index].title);
     s->next_song = song_none_pressed;
 }
 void song_none_pressed(struct state *s)

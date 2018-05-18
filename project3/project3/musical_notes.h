@@ -8,17 +8,19 @@
 
 typedef struct
 {
-    uint16_t freq; // timer1 TOP value
-    uint16_t time_scaler;  // divides length of beat
+    uint16_t freq;        // timer1 TOP value
+    uint16_t time_scaler; // divides length of beat
 } musical_note;
 
 #define SONG(notes...) \
     {                  \
         notes          \
     }
-#define MUSICAL_NOTE(note, duration) \
-    musical_note { NOTE##note, duration }
 
+#define MUSICAL_NOTE(note, duration) \
+    {                                \
+        NOTE_##note, duration        \
+    }
 
 // Note Types
 
@@ -28,6 +30,11 @@ typedef struct
 #define EIGHTH_NOTE(note) MUSICAL_NOTE(note, 8)
 #define SIXTEENTH_NOTE(note) MUSICAL_NOTE(note, 16)
 
+#define WHOLE_DOT_NOTE(note) MUSICAL_NOTE(note, 64 + 32)
+#define HALF_DOT_NOTE(note) MUSICAL_NOTE(note, 32 + 16)
+#define QUARTER_DOT_NOTE(note) MUSICAL_NOTE(note, 16 + 8)
+#define EIGHTH_DOT_NOTE(note) MUSICAL_NOTE(note, 8 + 4)
+#define SIXTEENTH_DOT_NOTE(note) MUSICAL_NOTE(note, 4 + 2)
 
 // Note Type Shortcuts
 #define M__NOTE(note, duration) MUSICAL_NOTE(note, duration)
@@ -42,20 +49,12 @@ typedef struct
 #define ED_NOTE(n) EIGHTH_DOT_NOTE(n)
 #define SD_NOTE(n) SIXTEENTH_DOT_NOTE(n)
 
-// Note Timbre
-// Changes how the notes sound
-#define TIMBRE_12 0.125f
-#define TIMBRE_25 0.250f
-#define TIMBRE_50 0.500f
-#define TIMBRE_75 0.750f
-#define TIMBRE_DEFAULT TIMBRE_50
-
+//
 // Notes - # = Octave
-
-#define NOTE_REST 0
-
+//
 // freq = f_clk / (2 * prescaler * TOP)
 // TOP = 62500 / freq (prescaler = 64)
+//
 
 #define NOTE_REST 0
 #define NOTE_C0 3822

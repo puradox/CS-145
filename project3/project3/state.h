@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "musical_notes.h"
+#include "song_list.h"
 
 //
 // Data types
@@ -15,7 +16,6 @@ typedef void state_fn(struct state *);
 
 struct state
 {
-
     // Finite state machines
     state_fn *next_song;
     state_fn *next_volume;
@@ -26,16 +26,12 @@ struct state
     // Data
     uint16_t tempo;
     uint16_t volume;
-    musical_note *song;
-    uint16_t song_len;
-    char *song_title;
-	
+    song *song_list;
+    uint16_t song_list_len;
+    uint8_t song_index;
+
 	int note_duration_played;
 	int note_index;
-	
-	song mario;
-	int mario_length;
-
 
     // Input
     bool A;     // volume up
