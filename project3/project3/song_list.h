@@ -121,8 +121,12 @@ static const musical_note song_number_one[] = {
 };
 
 static const song song_list[] = {
-    SONG("Mario theme", song_mario_theme),
-    SONG("Mario gameover", song_mario_gameover),
+    SONG("Mario", song_mario_theme),
+    SONG("Game over", song_mario_gameover),
+    SONG("Overwatch", song_overwatch_theme),
+    SONG("Doom", song_doom),
+    SONG("Disney", song_disney),
+    SONG("#1", song_number_one),
 };
 
 #endif
