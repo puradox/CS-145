@@ -51,7 +51,7 @@ TIMER2_TICK()
         // Reset the Watchdog timer (expires in 2.1 seconds)
         wdt_reset();
 
-        /*
+        
 		// Reset the keypad input
         s.A = is_key_pressed(KEY_A);
         s.B = is_key_pressed(KEY_B);
@@ -60,16 +60,12 @@ TIMER2_TICK()
         s.star = is_key_pressed(KEY_STAR);
         s.pound = is_key_pressed(KEY_POUND);
 		
-		
-*/
-
-
-		
+	
         // Run the finite state machines
-        //s.next_song(&s);
-        //s.next_volume(&s);
-        //s.next_tempo(&s);
-        //s.next_player(&s);
+        s.next_song(&s);
+        s.next_volume(&s);
+        s.next_tempo(&s);
+        s.next_player(&s);
     }
     else
     {
