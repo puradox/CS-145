@@ -7,7 +7,6 @@
 #include "menu.h"
 #include "state.h"
 #include "timer.h"
-#include "musical_notes.h"
 
 static struct state s;
 static char running;
