@@ -8,7 +8,11 @@ int is_pressed(int row, int col)
     DDRC = (1 << row);        // row is an output (strong 0)
     PORTC = (1 << (col + 4)); // col is a "pull up" input (weak 1)
 
-    // Allow two cycles for the pin to program
+    // Allow a few cycles for the pin to program (fixes ghosting)
+    asm volatile("nop" ::);
+    asm volatile("nop" ::);
+    asm volatile("nop" ::);
+    asm volatile("nop" ::);
     asm volatile("nop" ::);
     asm volatile("nop" ::);
 
