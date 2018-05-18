@@ -1,7 +1,7 @@
 #include "state.h"
 #include "menu.h"
 
-struct state make_state(state_fn *start)
+struct state make_state()
 {
     struct state s = {
         .next_song = song_start,
