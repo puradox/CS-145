@@ -86,6 +86,7 @@ void timer2_start(void)
 
     // Configure timer
     TCCR2 |= _BV(WGM21);                        // Enable CTC mode
+    TCNT2 = 0;                                  // Reset counter
     OCR2 = 124;                                 // Set CTC compare value at 16ms per tick
     TCCR2 |= _BV(CS22) | _BV(CS21) | _BV(CS20); // Start timer at Fcpu/1024
 }

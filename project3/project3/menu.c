@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "menu.h"
 #include "lcd.h"
 
@@ -40,10 +42,13 @@ void song_prev_pressed(struct state *s)
 
 // Volume FSM
 
+char *volume_text;
+
 void render_volume(uint16_t volume)
 {
+    sprintf(volume_text, "Vol %d/10", volume);
     pos_lcd(1, 0);
-    puts_lcd2(sprintf("Vol %d/10", volume));
+    puts_lcd2(volume_text);
 }
 
 void volume_start(struct state *s)
@@ -77,10 +82,13 @@ void volume_down_pressed(struct state *s)
 
 // Tempo
 
+char *tempo_text;
+
 void render_tempo(uint16_t tempo)
 {
+    sprintf(tempo_text, "BPM %d", tempo);
     pos_lcd(1, 7);
-    puts_lcd2(sprintf("BPM %d", tempo));
+    puts_lcd2(tempo_text);
 }
 
 void tempo_start(struct state *s)
