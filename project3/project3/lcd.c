@@ -9,31 +9,54 @@
 #define RW_PIN 1
 #define EN_PIN 2
 
-#define WRITE_BIT(dest, dest_i, src, src_i) GET_BIT(src, src_i) ? SET_BIT(dest, dest_i) : CLR_BIT(dest, dest_i)
+#define COPY_BIT(src, src_i, dest, dest_i) GET_BIT(src, src_i) ? SET_BIT(dest, dest_i) : CLR_BIT(dest, dest_i)
 
 static inline void
 set_data(unsigned char x)
 {
     // Write x to certain B and D ports
-    WRITE_BIT(PORTB, 3, x, 0);
-    WRITE_BIT(PORTB, 4, x, 1);
-    WRITE_BIT(PORTD, 0, x, 2);
-    WRITE_BIT(PORTD, 1, x, 3);
-    WRITE_BIT(PORTD, 2, x, 4);
-    WRITE_BIT(PORTD, 3, x, 5);
-    WRITE_BIT(PORTD, 6, x, 6);
-    WRITE_BIT(PORTD, 7, x, 7);
+    COPY_BIT(x, 0, PORTB, 3);
+    COPY_BIT(x, 1, PORTB, 4);
+    COPY_BIT(x, 2, PORTD, 0);
+    COPY_BIT(x, 3, PORTD, 1);
+    COPY_BIT(x, 4, PORTD, 2);
+    COPY_BIT(x, 5, PORTD, 3);
+    COPY_BIT(x, 6, PORTD, 6);
+    COPY_BIT(x, 7, PORTD, 7);
 
     // Program certain B and D ports to output
-    DDRB |= _BV(3) | _BV(4);
-    DDRD |= ~(_BV(4) | _BV(5)); // Skip over OC1B and OC1A
+	SET_BIT(DDRB, 3);
+	SET_BIT(DDRB, 4);
+	SET_BIT(DDRD, 0);
+	SET_BIT(DDRD, 1);
+	SET_BIT(DDRD, 2);
+	SET_BIT(DDRD, 3);
+	SET_BIT(DDRD, 6);
+	SET_BIT(DDRD, 7);
 }
 
 static inline unsigned char
 get_data(void)
 {
-    DDRD = 0x00;
-    return PIND;
+	CLR_BIT(DDRB, 3);
+	CLR_BIT(DDRB, 4);
+	CLR_BIT(DDRD, 0);
+	CLR_BIT(DDRD, 1);
+	CLR_BIT(DDRD, 2);
+	CLR_BIT(DDRD, 3);
+	CLR_BIT(DDRD, 6);
+	CLR_BIT(DDRD, 7);
+
+    unsigned char x = 0;
+    COPY_BIT(PINB, 3, x, 0);
+    COPY_BIT(PINB, 4, x, 1);
+    COPY_BIT(PIND, 0, x, 2);
+    COPY_BIT(PIND, 1, x, 3);
+    COPY_BIT(PIND, 2, x, 4);
+    COPY_BIT(PIND, 3, x, 5);
+    COPY_BIT(PIND, 6, x, 6);
+    COPY_BIT(PIND, 7, x, 7);
+    return x;
 }
 
 static inline void
