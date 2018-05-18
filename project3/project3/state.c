@@ -10,17 +10,19 @@ struct state make_state()
         .next_song = song_start,
         .next_volume = volume_start,
         .next_tempo = tempo_start,
-        .next_player = play_song,
+        .next_player = player_start,
 
         // Music player
         .tempo = 128,
         .volume = 5,
-        .song_list = song_list,
-        .song_list_len = sizeof(song_list) / sizeof(song),
-        .song_index = 0,
 
+        .song_list = song_list,
+        .song_list_len = sizeof(song_list) / sizeof(musical_song),
+
+        .song_index = 0,
 		.note_index = 0,
-		.note_duration_played = 0,
+		.duration_max = 0,
+		.duration_curr = 0,
 
         // Menu
         .A = false,

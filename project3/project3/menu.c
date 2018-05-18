@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "audio.h"
 #include "menu.h"
 #include "lcd.h"
 
@@ -22,19 +23,27 @@ void song_none_pressed(struct state *s)
     {
         s->next_song = song_next_pressed;
         s->song_index = (s->song_index + 1) % s->song_list_len;
-        render_song_title(s->song_list[s->song_index].title);
-
-        s->note_index = 0;
-        s->note_duration_played = 0;
     }
     else if (s->star)
     {
         s->next_song = song_prev_pressed;
         s->song_index = (s->song_index - 1) % s->song_list_len;
-        render_song_title(s->song_list[s->song_index].title);
+    }
 
+    if (s->pound || s->star)
+    {
         s->note_index = 0;
-        s->note_duration_played = 0;
+
+        musical_song song = s->song_list[s->song_index];
+        musical_note note = song.notes[s->note_index];
+
+        render_song_title(song.title);
+
+        s->duration_curr = 0;
+        s->duration_max = duration_to_ms(s->tempo, note.duration);
+
+        audio_on();
+        play_freq(note.freq, s->volume);
     }
 }
 void song_next_pressed(struct state *s)

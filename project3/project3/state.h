@@ -23,14 +23,16 @@ struct state
 
 
     // Data
-    uint16_t tempo;
-    uint16_t volume;
-    song *song_list;
-    uint16_t song_list_len;
-    uint8_t song_index;
+    uint8_t tempo;
+    uint8_t volume;
 
-	int note_index;
-	int note_duration_played;
+    musical_song *song_list;
+    uint16_t song_list_len;
+
+    uint8_t song_index;
+    uint8_t note_index;
+    uint32_t duration_max;
+    uint32_t duration_curr;
 
     // Input
     bool A;     // volume up

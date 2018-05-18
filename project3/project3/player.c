@@ -1,56 +1,48 @@
 #include "player.h"
+#include "audio.h"
 
-int note_duration_to_ms(int bpm, int scaler)
+uint32_t duration_to_ms(uint8_t bpm, uint8_t duration)
 {
-	return ((bpm/60) / scaler) * 1000;
+    // SEC_IN_MIN * MS_IN_SEC / BPM / 64 * 1/64 notes = duration
+    return ((duration / 2) * 1875) / bpm;
 }
 
-bool end_of_song(struct state* s)
+void player_start(struct state *s)
 {
-	return (s->note_index + 1) >= s->song_list[s->song_index].length;
+    s->note_index = 0;
+	musical_note note = s->song_list[s->song_index].notes[s->note_index];
+
+    s->duration_curr = 0;
+    s->duration_max = duration_to_ms(s->tempo, note.duration);
+    s->next_player = player_playing;
+
+    audio_on();
+    play_freq(note.freq, s->volume);
 }
 
-
-void player_start(struct state* s)
+void player_playing(struct state* s)
 {
-	s->note_index = 0;
-	/*
-	if (s->pound)
+	if (s->duration_curr < s->duration_max)
 	{
-		s->note_index = 0;
-		s->note_duration_played = 0;
-		s->song_index = ((s->song_index+1) % s->song_list[s->song_index].length);
-
-	}
-	if (s->star)
-	{
-		s->note_index = 0;
-		s->note_duration_played = 0;
-		s->note_index = ((s->song_index - 1) % s->song_list[s->song_index].length);
-	}
-	 */
-}
-
-
-void play_song(struct state* s)
-{
-	musical_note current_note = s->song_list[s->song_index].notes[s->note_index];
-	if (s->note_duration_played < note_duration_to_ms(s->tempo, current_note.time_scaler))
-	{
-		play_freq(current_note.freq, s->volume);
-		s->note_duration_played += 16;
+		s->duration_curr += 16; // each tick is 16ms
 	}
 	else
 	{
-		if (!end_of_song(s))
+        musical_song song = s->song_list[s->song_index];
+
+		if (s->note_index < song.length)
 		{
 			s->note_index++;
-			play_freq(current_note.freq);
-			s->note_duration_played = 16;
+            musical_note note = song.notes[s->note_index];
+
+			s->duration_curr = 0;
+            s->duration_max = duration_to_ms(s->tempo, note.duration);
+
+			play_freq(note.freq, s->volume);
 		}
 		else
 		{
-			s->next_player = player_start;
+            audio_off();
 		}
 	}
 }

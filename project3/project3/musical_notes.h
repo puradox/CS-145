@@ -6,8 +6,8 @@
 
 typedef struct
 {
-    uint16_t freq;        // timer1 TOP value
-    uint16_t time_scaler; // divides length of beat
+    uint16_t freq;    // timer1 TOP value
+    uint8_t duration; // # of 1/64 notes
 } musical_note;
 
 #define MUSICAL_NOTE(note, duration) \
@@ -20,7 +20,7 @@ typedef struct
     const char title[16];
     const uint8_t length;
     const musical_note *notes;
-} song;
+} musical_song;
 
 #define SONG(title, notes)                                   \
     {                                                        \
@@ -28,18 +28,17 @@ typedef struct
     }
 
 // Note Types
+#define WHOLE_NOTE(note)          MUSICAL_NOTE(note, 64)
+#define HALF_NOTE(note)           MUSICAL_NOTE(note, 32)
+#define QUARTER_NOTE(note)        MUSICAL_NOTE(note, 16)
+#define EIGHTH_NOTE(note)         MUSICAL_NOTE(note,  8)
+#define SIXTEENTH_NOTE(note)      MUSICAL_NOTE(note,  4)
 
-#define WHOLE_NOTE(note) MUSICAL_NOTE(note, 1)
-#define HALF_NOTE(note) MUSICAL_NOTE(note, 2)
-#define QUARTER_NOTE(note) MUSICAL_NOTE(note, 4)
-#define EIGHTH_NOTE(note) MUSICAL_NOTE(note, 8)
-#define SIXTEENTH_NOTE(note) MUSICAL_NOTE(note, 16)
-
-#define WHOLE_DOT_NOTE(note) MUSICAL_NOTE(note, 64 + 32)
-#define HALF_DOT_NOTE(note) MUSICAL_NOTE(note, 32 + 16)
-#define QUARTER_DOT_NOTE(note) MUSICAL_NOTE(note, 16 + 8)
-#define EIGHTH_DOT_NOTE(note) MUSICAL_NOTE(note, 8 + 4)
-#define SIXTEENTH_DOT_NOTE(note) MUSICAL_NOTE(note, 4 + 2)
+#define WHOLE_DOT_NOTE(note)      MUSICAL_NOTE(note, 64+32)
+#define HALF_DOT_NOTE(note)       MUSICAL_NOTE(note, 32+16)
+#define QUARTER_DOT_NOTE(note)    MUSICAL_NOTE(note, 16+8)
+#define EIGHTH_DOT_NOTE(note)     MUSICAL_NOTE(note,  8+4)
+#define SIXTEENTH_DOT_NOTE(note)  MUSICAL_NOTE(note,  4+2)
 
 // Note Type Shortcuts
 #define M__NOTE(note, duration) MUSICAL_NOTE(note, duration)

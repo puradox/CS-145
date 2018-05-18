@@ -120,7 +120,7 @@ static const musical_note song_number_one[] = {
     H__NOTE(C5),
 };
 
-static const song song_list[] = {
+static const musical_song song_list[] = {
     SONG("Mario", song_mario_theme),
     SONG("Game over", song_mario_gameover),
     SONG("Overwatch", song_overwatch_theme),

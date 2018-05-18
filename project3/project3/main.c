@@ -1,7 +1,6 @@
 #include <avr/io.h>
 #include <avr/wdt.h>
 
-#include "audio.h"
 #include "keypad.h"
 #include "lcd.h"
 #include "menu.h"
@@ -24,7 +23,6 @@ int main(void)
 
     s = make_state();
     timer2_start(); // Ticks every 16ms
-    audio_on();
 
     while (running == 1)
     {
@@ -41,27 +39,27 @@ int main(void)
 
 TIMER2_TICK()
 {
-    if (s.next_song != 0 && s.next_volume != 0 && s.next_tempo != 0 && s.next_player!= 0)
-    {
-        // Reset the Watchdog timer (expires in 2.1 seconds)
-        wdt_reset();
-
-		// Reset the keypad input
-        s.A = is_key_pressed(KEY_A);
-        s.B = is_key_pressed(KEY_B);
-        s.C = is_key_pressed(KEY_C);
-        s.D = is_key_pressed(KEY_D);
-        s.star = is_key_pressed(KEY_STAR);
-        s.pound = is_key_pressed(KEY_POUND);
-
-        // Run the finite state machines
-        s.next_song(&s);
-        s.next_volume(&s);
-        s.next_tempo(&s);
-        s.next_player(&s);
-    }
-    else
+    // Check for invalid FSM states
+    if (s.next_song == 0 || s.next_volume == 0 || s.next_tempo == 0 || s.next_player == 0)
     {
         running = 0;
+        return;
     }
+
+    // Reset the Watchdog timer (expires in 2.1 seconds)
+    wdt_reset();
+
+    // Reset the keypad input
+    s.A = is_key_pressed(KEY_A);
+    s.B = is_key_pressed(KEY_B);
+    s.C = is_key_pressed(KEY_C);
+    s.D = is_key_pressed(KEY_D);
+    s.star = is_key_pressed(KEY_STAR);
+    s.pound = is_key_pressed(KEY_POUND);
+
+    // Run the finite state machines
+    s.next_song(&s);
+    s.next_volume(&s);
+    s.next_tempo(&s);
+    s.next_player(&s);
 }
