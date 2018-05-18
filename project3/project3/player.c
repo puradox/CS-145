@@ -10,9 +10,22 @@ bool end_of_song(struct state* s)
 	return (s->note_index + 1) >= s->song_list[s->song_index].length;
 }
 
+
 void player_start(struct state* s)
 {
 	s->note_index = 0;
+	if (s->pound) 
+	{
+		s->note_index = 0;
+		s->note_duration_played = 0;
+		s->song_index = ((s->song_index+1) % song_list->length);
+	}
+	if (s->star)
+	{
+		s->note_index = 0;
+		s->note_duration_played = 0;
+		s->note_index = ((s->song_index - 1) % song_list->length);
+	}
 }
 
 
@@ -21,7 +34,7 @@ void play_song(struct state* s)
 	musical_note current_note = s->song_list[s->song_index].notes[s->note_index];
 	if (s->note_duration_played < note_duration_to_ms(s->tempo, current_note.time_scaler))
 	{
-		play_freq(current_note.freq);
+		play_freq(current_note.freq, s->volume);
 		s->note_duration_played += 16;
 	}
 	else
