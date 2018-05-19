@@ -79,10 +79,10 @@ void timer2_start(void)
     sei();               // enable global interrupts
 
     // Clear Timer on Compare Match (CTC)
-    TCCR2 |= _BV(WGM21);      // enable CTC mode
-    TCNT2 = 0;                // reset counter
-    OCR2 = 124;               // set CTC compare value at 16ms per tick
-    TCCR2 |= TIMER2_CLK_1024; // start timer at Fcpu/1024
+    TCCR2 |= _BV(WGM21);     // enable CTC mode
+    TCNT2 = 0;               // reset counter
+    OCR2 = 124;              // set CTC compare value at 16ms per tick
+    TCCR2 |= TIMER2_CLK_256; // start timer at Fcpu/1024
 }
 
 void timer2_stop(void)
