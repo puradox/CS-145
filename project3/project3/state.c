@@ -13,7 +13,7 @@ struct state make_state()
         .next_player = player_start,
 
         // Music player
-        .tempo = 128,
+        .tempo = 100,
         .volume = 5,
 
         .song_list = song_list,

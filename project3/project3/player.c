@@ -29,10 +29,10 @@ void player_playing(struct state* s)
 	else
 	{
         musical_song song = s->song_list[s->song_index];
+        s->note_index++;
 
 		if (s->note_index < song.length)
 		{
-			s->note_index++;
             musical_note note = song.notes[s->note_index];
 
 			s->duration_curr = 0;
