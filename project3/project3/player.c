@@ -1,7 +1,7 @@
 #include "player.h"
 #include "audio.h"
 
-uint32_t duration_to_ms(uint8_t bpm, uint8_t duration)
+uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 {
     // SEC_IN_MIN * MS_IN_SEC / BPM / 64 * 1/64 notes = duration
     return ((duration / 2) * 1875) / bpm;

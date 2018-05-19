@@ -31,8 +31,8 @@ struct state
 
     uint8_t song_index;
     uint8_t note_index;
-    uint32_t duration_max;
-    uint32_t duration_curr;
+    uint16_t duration_max;
+    uint16_t duration_curr;
 
     // Input
     bool A;     // volume up
