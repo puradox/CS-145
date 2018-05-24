@@ -1,10 +1,13 @@
 #include "player.h"
 #include "audio.h"
 
+#include <stdio.h>
+#include "lcd.h"
+
 uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 {
     // SEC_IN_MIN * MS_IN_SEC / BPM / 64 * 1/64 notes = duration
-    return ((duration / 2) * 1875) / bpm;
+    return (1875.0 * (double)duration) / (2.0 * (double)bpm);
 }
 
 void player_start(struct state *s)
@@ -24,7 +27,7 @@ void player_playing(struct state* s)
 {
 	if (s->duration_curr < s->duration_max)
 	{
-		s->duration_curr += 16; // each tick is 16ms
+		s->duration_curr += 4; // each tick is 16ms
 	}
 	else
 	{
@@ -34,7 +37,7 @@ void player_playing(struct state* s)
 		if (s->note_index < song.length)
 		{
             musical_note note = song.notes[s->note_index];
-
+			
 			s->duration_curr = 0;
             s->duration_max = duration_to_ms(s->tempo, note.duration);
 
