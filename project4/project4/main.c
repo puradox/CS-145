@@ -15,14 +15,22 @@
 
 int main(void)
 {
-	
+	// next step: timer0 calling
 	ini_avr();
 	ini_lcd();
+	
+	pos_lcd(0, 0);
+	puts_lcd2("workin =p");
 	
     /* Replace with your application code */
     while (1) 
     {
-		
+		if (is_key_pressed(KEY_A))
+		{
+				pos_lcd(0, 0);
+				puts_lcd2("a pressed =p");
+		}
+
     }
 }
 
