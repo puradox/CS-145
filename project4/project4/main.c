@@ -6,13 +6,23 @@
  */ 
 
 #include <avr/io.h>
+#include <avr/wdt.h>
+
+#include "keypad.h"
+#include "lcd.h"
+#include "timer.h"
 
 
 int main(void)
 {
+	
+	ini_avr();
+	ini_lcd();
+	
     /* Replace with your application code */
     while (1) 
     {
+		
     }
 }
 
