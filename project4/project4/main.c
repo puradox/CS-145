@@ -11,7 +11,10 @@
 #include "keypad.h"
 #include "lcd.h"
 #include "timer.h"
+#include "state.h"
 
+static struct state s;
+char running = 1;
 
 int main(void)
 {
@@ -19,18 +22,25 @@ int main(void)
 	ini_avr();
 	ini_lcd();
 	
+	timer0_start();
+	s = make_state();
+	
 	pos_lcd(0, 0);
-	puts_lcd2("workin =p");
+	
 	
     /* Replace with your application code */
-    while (1) 
+    while (running) 
     {
-		if (is_key_pressed(KEY_A))
-		{
-				pos_lcd(0, 0);
-				puts_lcd2("a pressed =p");
-		}
-
     }
 }
+
+
+TIMER0_TICK()
+{
+	char* buffer[8];
+	sprintf(buffer, "%i", s.measured_voltage);
+	pos_lcd(0, 0);
+	puts_lcd2(buffer);
+}
+
 
