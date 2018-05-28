@@ -23,7 +23,7 @@ int main(void)
 	ini_lcd();
 	
 	timer0_start();
-	s = make_state();
+	s = make_state(measuring);
 	
 	pos_lcd(0, 0);
 	
@@ -37,6 +37,7 @@ int main(void)
 
 TIMER0_TICK()
 {
+	s.measure(&s);
 	char* buffer[8];
 	sprintf(buffer, "%i", s.measured_voltage);
 	pos_lcd(0, 0);

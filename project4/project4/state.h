@@ -12,10 +12,10 @@
 
 struct state;
 typedef void state_fn(struct state *);
-// void state_fn_todo(struct state *s) {} ?
 
 struct state
 {	
+	state_fn* measure;
 	unsigned short measured_voltage;
 };
 
@@ -24,6 +24,11 @@ struct state
 //
 
 struct state make_state();
+
+void measuring(struct state *);
+void not_measuring(struct state *);
+
+
 
 
 #endif

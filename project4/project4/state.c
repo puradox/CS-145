@@ -7,10 +7,21 @@
 
 #include "state.h"
 
-struct state make_state()
+struct state make_state(state_fn* measure_start)
 {
 	struct state s = {
-		.measured_voltage = 500 // this will be replaced by an initial measurement
+		measure_start,
+		0 // this will be replaced by an initial measurement
 	};
 	return s;
+}
+
+void measuring(struct state *s)
+{
+	s->measured_voltage++;
+}
+
+void not_measuring(struct state *s)
+{
+	
 }
