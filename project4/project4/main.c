@@ -26,20 +26,42 @@ int main(void)
 	s = make_state(measuring);
 	
 	ADCSRA |= (1 << ADEN);
+	ADMUX |= (1 << REFS0);
+	// value in ADC
 	
     while (running) 
     {
     }
 }
 
+int i = 0;
+
 
 TIMER0_TICK()
 {
+	/*
 	s.measure(&s);
 	char* buffer[8];
-	sprintf(buffer, "%i", s.measured_voltage);
+]	sprintf(buffer, "%i", s.measured_voltage);
 	pos_lcd(0, 0);
 	puts_lcd2(buffer);
+	*/
+	if ((ADCSRA & 64) == 0) {
+		ADCSRA |= (1 << ADSC); // automatically cleared when done
+	
+		// display adc
+		char* buffer[8];
+		sprintf(buffer, "%i", ADC);
+		pos_lcd(0, 0);
+		puts_lcd2(buffer);
+		
+		// display tick count
+		char* buffer2[8];
+		sprintf(buffer2, "     %i", i);
+		pos_lcd(4, 0);
+		puts_lcd2(buffer2);
+		++i;
+	}
 }
 
 
