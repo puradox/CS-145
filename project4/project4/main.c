@@ -25,6 +25,8 @@ int main(void)
 	timer0_start();
 	s = make_state(measuring);
 	
+	ADCSRA |= (1 << ADEN);
+	
     while (running) 
     {
     }

@@ -19,6 +19,7 @@ struct state make_state(state_fn* measure_start)
 void measuring(struct state *s)
 {
 	s->measured_voltage += 1;
+	//s->measured_voltage = ADC;
 }
 
 void not_measuring(struct state *s)
