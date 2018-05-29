@@ -11,14 +11,14 @@ struct state make_state(state_fn* measure_start)
 {
 	struct state s = {
 		measure_start,
-		0 // this will be replaced by an initial measurement
+		50 // this will be replaced by an initial measurement
 	};
 	return s;
 }
 
 void measuring(struct state *s)
 {
-	s->measured_voltage++;
+	s->measured_voltage += 1;
 }
 
 void not_measuring(struct state *s)

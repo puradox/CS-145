@@ -25,10 +25,6 @@ int main(void)
 	timer0_start();
 	s = make_state(measuring);
 	
-	pos_lcd(0, 0);
-	
-	
-    /* Replace with your application code */
     while (running) 
     {
     }
