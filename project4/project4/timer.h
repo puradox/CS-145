@@ -34,7 +34,7 @@ void timer0_stop(void);
 
 enum timer1_frequency
 {
-    TIMER1_OFF = 1,
+    TIMER1_OFF = 0,
     TIMER1_CLK_1,
     TIMER1_CLK_8,
     TIMER1_CLK_64,

@@ -19,14 +19,14 @@
 void timer0_start(void)
 {
     // Configure interrupts
-    TIMSK |= _BV(OCIE0); // enable CTC interrupt
+    TIMSK |= (OCIE0); // enable CTC interrupt
     sei();               // enable global interrupts
 
     // Clear Timer on Compare Match (CTC)
-    TCCR0 |= _BV(WGM01);      // enable CTC mode
+    TCCR0 |= (1 << WGM01);      // enable CTC mode
 	// might be 4-1
-    OCR0 = 255;               // Set CTC compare value at 16ms per tick
-    TCCR0 |= TIMER0_CLK_8; // start timer at Fcpu/1024
+    OCR0 = 3;               // Set CTC compare value at 16ms per tick
+    TCCR0 |= TIMER0_CLK_64; // start timer at Fcpu/1024
 }
 
 void timer0_stop(void)
@@ -52,7 +52,9 @@ void timer1_start(unsigned short ms)
 
     // Clear Timer on Compare Match (CTC)
     TCCR1B |= (1 << WGM12);                 // enable CTC mode
-    OCR1A = (unsigned short)(125 * ms - 1); // set CTC compare value
+    //OCR1A = (unsigned short)(125 * ms - 1); // set CTC compare value
+	OCR1A = 62499;
+
     TCCR1B |= TIMER1_CLK_64;                // Start timer at Fcpu/64
 }
 
