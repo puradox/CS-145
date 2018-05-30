@@ -2,7 +2,6 @@
 #include <avr/wdt.h>
 #include <stddef.h>
 
-#include "keypad.h"
 #include "lcd.h"
 #include "timer.h"
 #include "state.h"
