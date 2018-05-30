@@ -31,6 +31,8 @@ struct state
 
     // Running sum of the past and current voltages
     uint16_t sum;
+	
+	int A;
 };
 
 struct state make_state();

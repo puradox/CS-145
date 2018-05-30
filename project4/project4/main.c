@@ -28,6 +28,7 @@ int main(void)
     }
 }
 
+
 TIMER1_TICK()
 {
     // Check for invalid FSM states
@@ -55,4 +56,12 @@ TIMER1_TICK()
 
     // Run FSMs
     //s.next_display(&s);
+	
+	if (s.A != is_key_pressed(3))
+	{
+			char buffer2[8];
+			sprintf(buffer2, "WHOOOOOHOOOOOOOO");
+			pos_lcd(0,0);
+			puts_lcd2(buffer2);
+	}
 }
