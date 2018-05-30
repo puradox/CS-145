@@ -1,34 +1,38 @@
-/*
- * state.h
- *
- * Created: 5/28/2018 3:22:43 PM
- *  Author: David
- */ 
-
-
 #ifndef STATE_H
 #define STATE_H
 
+#include <stdint.h>
 
 struct state;
 typedef void state_fn(struct state *);
 
 struct state
-{	
-	state_fn* next_measure;
-	unsigned short measured_voltage;
+{
+	state_fn* next_display;
+
+    //
+    // input
+    //
+
+	uint16_t measured_voltage;
+
+    //
+    // display FSM
+    //
+
+    // Circular array of past and current voltages
+    uint16_t *voltages;
+
+    // Cursor to the next voltage to replace in the circular array
+    uint8_t cursor;
+
+    // Number of voltages stored in the circular array
+    uint8_t count;
+
+    // Running sum of the past and current voltages
+    uint16_t sum;
 };
 
-//
-// Functions
-//
-
 struct state make_state();
-
-void measuring(struct state *);
-void not_measuring(struct state *);
-
-
-
 
 #endif
