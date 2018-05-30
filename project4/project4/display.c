@@ -7,7 +7,7 @@
 #define MAX_ADC 1023.0   // maximum value of the ADC return value
 #define VOLTAGES_SIZE 10 // how many voltages should be stored for avg, min, max
 
-#define TO_VOLTS(value) MAX_VOLTAGE *(double)value / MAX_ADC
+#define TO_VOLTS(value) MAX_VOLTAGE * (double)(value) / MAX_ADC
 
 void display_start(struct state *s)
 {
