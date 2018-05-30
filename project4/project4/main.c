@@ -1,11 +1,4 @@
-/*
- * project4.c
- *
- * Created: 5/24/2018 11:20:16 AM
- * Author : David
- */ 
-
-#include <avr/io.h>
+ #include <avr/io.h>
 #include <avr/wdt.h>
 
 #include "keypad.h"
@@ -27,8 +20,7 @@ int main(void)
 	
 	ADCSRA |= (1 << ADEN);
 	ADMUX |= (1 << REFS0);
-	// value in ADC
-	
+		
     while (running) 
     {
     }
@@ -58,7 +50,7 @@ TIMER0_TICK()
 		// display tick count
 		char* buffer2[8];
 		sprintf(buffer2, "     %i", i);
-		pos_lcd(4, 0);
+		pos_lcd(0, 0);
 		puts_lcd2(buffer2);
 		++i;
 	}

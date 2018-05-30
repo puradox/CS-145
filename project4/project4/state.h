@@ -15,7 +15,7 @@ typedef void state_fn(struct state *);
 
 struct state
 {	
-	state_fn* measure;
+	state_fn* next_measure;
 	unsigned short measured_voltage;
 };
 

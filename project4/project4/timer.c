@@ -24,8 +24,9 @@ void timer0_start(void)
 
     // Clear Timer on Compare Match (CTC)
     TCCR0 |= _BV(WGM01);      // enable CTC mode
-    OCR0 = 124;               // Set CTC compare value at 16ms per tick
-    TCCR0 |= TIMER0_CLK_1024; // start timer at Fcpu/1024
+	// might be 4-1
+    OCR0 = 255;               // Set CTC compare value at 16ms per tick
+    TCCR0 |= TIMER0_CLK_8; // start timer at Fcpu/1024
 }
 
 void timer0_stop(void)
