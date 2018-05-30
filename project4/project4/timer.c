@@ -52,8 +52,8 @@ void timer1_start(unsigned short ms)
 
     // Clear Timer on Compare Match (CTC)
     TCCR1B |= (1 << WGM12);                 // enable CTC mode
-    //OCR1A = (unsigned short)(125 * ms - 1); // set CTC compare value
-	OCR1A = 62499;
+    OCR1A = (unsigned short)(125 * ms - 1); // set CTC compare value
+	//OCR1A = 62499; // proj 4. ms = 500
 
     TCCR1B |= TIMER1_CLK_64;                // Start timer at Fcpu/64
 }

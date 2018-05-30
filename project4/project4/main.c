@@ -26,8 +26,6 @@ int main(void)
     }
 }
 
-int i = 0;
-
 
 TIMER1_TICK()
 {
@@ -38,22 +36,18 @@ TIMER1_TICK()
 	pos_lcd(0, 0);
 	puts_lcd2(buffer);
 	*/
-	//if ((ADCSRA & (1 << ADSC)) == 0) {
+	
+	if ((ADCSRA & (1 << ADSC)) == 0) {
 		ADCSRA |= (1 << ADSC); // automatically cleared when done
 	
-		// display adc
-		char* buffer[4];
+
+		char* buffer[8];
 		sprintf(buffer, "%4i", ADC);
 		pos_lcd(0, 0);
 		puts_lcd2(buffer);
 		
-		// display tick count
-		char* buffer2[8];
-		sprintf(buffer2, "     %i", i);
-		pos_lcd(0, 4);
-		puts_lcd2(buffer2);
-		++i;
-	//}
+
+	}
 }
 
 
