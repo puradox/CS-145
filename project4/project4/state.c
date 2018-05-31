@@ -4,8 +4,7 @@
 struct state make_state()
 {
 	struct state s = {
-		//.next_display = display_start,
-		.A = 0
+		.next_display = display_start,
 	};
 	return s;
 }

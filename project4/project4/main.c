@@ -4,6 +4,7 @@
 
 #include "lcd.h"
 #include "timer.h"
+#include "keypad.h"
 #include "state.h"
 
 static struct state s;
@@ -12,11 +13,10 @@ char running = 1;
 int main(void)
 {
     // next step: timer0 calling
-    //ini_avr();
+    ini_avr();
     ini_lcd();
-	wait_avr(50);
 
-    //s = make_state();
+    s = make_state();
 
     ADCSRA |= (1 << ADEN);
     ADMUX |= (1 << REFS0);
@@ -26,19 +26,22 @@ int main(void)
     while (running)
     {
     }
+
+    return 0;
 }
 
 
 TIMER1_TICK()
 {
+    // Reset the Watchdog timer (expires in 2.1 seconds)
+    wdt_reset();
+
     // Check for invalid FSM states
-	/*
     if (s.next_display == NULL)
     {
         running = 0;
         return;
     }
-	*/
 
     // Wait for the ADC to finish converting
     while ((ADCSRA & 64) != 0)
@@ -47,21 +50,9 @@ TIMER1_TICK()
     ADCSRA |= (1 << ADSC); // automatically cleared when done
 
     // Update inputs
-    //s.measured_voltage = ADC;
-
-	char buffer[8];
-	sprintf(buffer, "%4i", ADC);
-	pos_lcd(0,0);
-	puts_lcd2(buffer);
+    s.measured_voltage = ADC;
+    s.key_A = is_key_pressed(KEY_A);
 
     // Run FSMs
-    //s.next_display(&s);
-	
-	if (s.A != is_key_pressed(3))
-	{
-			char buffer2[8];
-			sprintf(buffer2, "WHOOOOOHOOOOOOOO");
-			pos_lcd(0,0);
-			puts_lcd2(buffer2);
-	}
+    s.next_display(&s);
 }

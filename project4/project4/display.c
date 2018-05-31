@@ -21,8 +21,9 @@ void display_start(struct state *s)
 void display_update(struct state *s)
 {
     uint16_t curr = s->measured_voltage;
+    uint16_t prev = s->voltages[s->cursor];
 
-    s->sum += curr - s->voltages[s->cursor];
+    s->sum += curr - prev;
     s->voltages[s->cursor] = curr;
     s->cursor += (s->cursor + 1) % VOLTAGES_SIZE;
 

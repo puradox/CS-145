@@ -1,6 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 struct state;
@@ -8,13 +9,14 @@ typedef void state_fn(struct state *);
 
 struct state
 {
-	state_fn* next_display;
+    state_fn *next_display;
 
     //
     // input
     //
 
-	uint16_t measured_voltage;
+    bool key_A; // is A on the keypad pressed?
+    uint16_t measured_voltage;
 
     //
     // display FSM
@@ -31,8 +33,6 @@ struct state
 
     // Running sum of the past and current voltages
     uint16_t sum;
-	
-	int A;
 };
 
 struct state make_state();
