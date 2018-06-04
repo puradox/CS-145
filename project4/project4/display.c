@@ -18,6 +18,17 @@ void display_start(struct state *s)
     s->next_display = display_update;
 }
 
+void display_restart(struct state *s)
+{
+
+	free(s->voltages);
+	s->voltages = calloc(VOLTAGES_SIZE, sizeof(unsigned short));
+	s->cursor = 0;
+	s->count = 0;
+	s->sum = 0;
+	s->next_display = display_update;
+}
+
 void display_update(struct state *s)
 {
     uint16_t curr = s->measured_voltage;
@@ -25,7 +36,7 @@ void display_update(struct state *s)
 
     s->sum += curr - prev;
     s->voltages[s->cursor] = curr;
-    s->cursor += (s->cursor + 1) % VOLTAGES_SIZE;
+    s->cursor = (s->cursor + 1) % VOLTAGES_SIZE;
 
     if (s->count < VOLTAGES_SIZE)
         s->count++;
