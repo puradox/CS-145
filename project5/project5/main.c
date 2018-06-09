@@ -15,6 +15,16 @@
 struct state s;
 //char buffer[16] = {'a', 'b', 'c', 'd', 'e', 'f', 'e'};
 // int i = 0;
+
+void display_game()
+{
+	pos_lcd(0,0);
+	puts_lcd2(s.row1);
+	
+	pos_lcd(1,0);
+	puts_lcd2(s.row2);
+}
+
 int main(void)
 {
 	
@@ -34,20 +44,7 @@ int main(void)
 TIMER1_TICK()
 {
 	
+	display_game();
+	s = generate_and_move(s,true);
 	
-	pos_lcd(0,0);
-	puts_lcd2(s.row1);
-	
-	pos_lcd(1,0);
-	puts_lcd2(s.row2);
-	
-	s = generate_and_move(s);
-
-	
-	/*
-	char buffer[8];
-	sprintf(buffer, "%i", s.ticks_since_last_block);
-	pos_lcd(1,0);
-	puts_lcd2(buffer);
-	*/
 }
