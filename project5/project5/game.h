@@ -1,8 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
-#define ROW_SIZE 15
+#include <stdbool.h>
 
-void move_row_left(char*);
+
+#define ROW_SIZE 16
+
+void move_row_left(char*, char);
+bool decide_if_block();
 
 #endif GAME_H

@@ -20,7 +20,7 @@ int main(void)
 	
 	ini_lcd();
 		
-	timer1_start(500);
+	timer1_start(100);
 		
 	s = make_state();
 	
@@ -41,8 +41,24 @@ TIMER1_TICK()
 	pos_lcd(1,0);
 	puts_lcd2(s.row2);
 	
-	move_row_left(s.row1);
-	move_row_left(s.row2);
-
-
+	move_row_left(s.row1, ' ');
+	
+	if (decide_if_block(s.ticks_since_last_block))
+	{
+		move_row_left(s.row2, 'B');
+		s.ticks_since_last_block = 0;
+	}
+	else 
+	{
+		move_row_left(s.row2, ' ');
+		++s.ticks_since_last_block;
+	}
+	
+	
+	/*
+	char buffer[8];
+	sprintf(buffer, "%i", s.ticks_since_last_block);
+	pos_lcd(1,0);
+	puts_lcd2(buffer);
+	*/
 }
