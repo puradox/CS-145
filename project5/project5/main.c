@@ -33,7 +33,7 @@ int main(void)
 		
 	s = make_state(ready);
 
-	timer1_start(200);
+	timer1_start(1000);
 		
 	
     /* Replace with your application code */
@@ -44,13 +44,23 @@ int main(void)
 
 TIMER1_TICK()
 {	
-	if (is_key_pressed(KEY_A) && s.jump == ready)
+	if (!s.gg)
 	{
-		s.jump = begin_jump;
+		if (is_key_pressed(KEY_A) && s.jump == ready)
+		{
+			s.jump = begin_jump;
+		}
+	
+		s.jump(&s);
+		s = generate_and_move(s);
+		// detect right after move
+		display_game();
 	}
-	
-	s.jump(&s);
-	s = generate_and_move(s);
-	
-	display_game();
+	else
+	{
+		char buffer[8];
+		sprintf(buffer, "GG");
+		pos_lcd(0,0);
+		puts_lcd2(buffer);
+	}
 }

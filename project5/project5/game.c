@@ -3,6 +3,12 @@
 
 struct state generate_and_move(struct state s)
 {
+
+	if (detect_player_block_collision(s))
+	{
+		s.gg = true;
+	}
+
 	move_row_left(s.row1, ' ', !s.player_in_bottom);
 		
 	if (decide_if_block(s.ticks_since_last_block))
@@ -40,4 +46,16 @@ move_row_left(char* screen, char new_column, bool player_in_row)
 bool decide_if_block(int ticks_since_block)
 {
 	return ticks_since_block > 3;
+}
+
+bool detect_player_block_collision(struct state s)
+{
+	if (s.player_in_bottom)
+	{
+		return s.row2[1] == 'B';
+	}
+	else
+	{
+		return s.row1[1] == 'B';
+	}
 }
