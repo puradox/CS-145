@@ -38,14 +38,16 @@ TIMER1_TICK()
 {	
 	if (!s.gg)
 	{
-
+		
 		if (is_key_pressed(KEY_A) && s.jump == ready)
 		{
 			s.jump = begin_jump;
 		}
 		
 		s.jump(&s);
+		
 		s.game_state(&s);
+		
 	}
 	else
 	{

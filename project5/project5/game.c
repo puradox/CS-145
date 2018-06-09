@@ -11,8 +11,14 @@ void menu(struct state* s)
 
 void play(struct state* s)
 {
-
-
+	/*
+	if (is_key_pressed(KEY_A) && s->jump == ready)
+	{
+		s->jump = begin_jump;
+	}
+		
+	s->jump(&s);
+*/
 	if (detect_player_block_collision(*s))
 	{
 		s->game_state = game_over;
