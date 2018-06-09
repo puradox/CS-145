@@ -17,6 +17,7 @@ struct state
 	char row2[16];
 	int ticks_since_last_block;
 	bool gg;
+	int ticks_played;
 };
 
 struct state make_state();

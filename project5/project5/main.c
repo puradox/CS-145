@@ -25,7 +25,7 @@ int main(void)
 		
 	s = make_state(play, ready);
 
-	timer1_start(1000);
+	timer1_start(100);
 		
 	
     /* Replace with your application code */
@@ -36,24 +36,13 @@ int main(void)
 
 TIMER1_TICK()
 {	
-	if (!s.gg)
+	// TODO: GET THE JUMP CODE INSIDE GAME_STATE PLAY
+	if (is_key_pressed(KEY_A) && s.jump == ready)
 	{
-		
-		if (is_key_pressed(KEY_A) && s.jump == ready)
-		{
-			s.jump = begin_jump;
-		}
-		
-		s.jump(&s);
-		
-		s.game_state(&s);
-		
+		s.jump = begin_jump;
 	}
-	else
-	{
-		char buffer[8];
-		sprintf(buffer, "GG");
-		pos_lcd(0,0);
-		puts_lcd2(buffer);
-	}
+		
+	s.jump(&s);
+		
+	s.game_state(&s);
 }

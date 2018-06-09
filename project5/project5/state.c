@@ -10,7 +10,8 @@ struct state make_state(state_fn game_menu, state_fn jump_start)
 		.row1 = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 		.row2 = {'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 		.ticks_since_last_block = 4, // display is last
-		.gg = false
+		.gg = false,
+		.ticks_played = 0
 	};
 	return s;
 }

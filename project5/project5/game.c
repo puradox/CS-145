@@ -36,13 +36,22 @@ void play(struct state* s)
 		move_row_left(s->row2, ' ', s->player_in_bottom);
 		++s->ticks_since_last_block;
 	}
+	
+	++s->ticks_played;
 	display_game(s);
 }
 
 void game_over(struct state* s)
 {
-	//s->row1 = {'G', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ', ' '};
+	char buffer[16];
+	sprintf(buffer, "GG");
+	pos_lcd(0,0);
+	puts_lcd2(buffer);
 	
+	char buffer2[16];
+	sprintf(buffer2, "u ran %3i steps!", s->ticks_played);
+	pos_lcd(1,0);
+	puts_lcd2(buffer2);
 }
 
 
