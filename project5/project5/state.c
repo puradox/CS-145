@@ -1,13 +1,14 @@
 #include "state.h"
 
 
-struct state make_state()
+struct state make_state(state_fn jump_start)
 {
 	struct state s = {
-		.key_A = false,
+		.jump = jump_start,
+		.player_in_bottom = true,
 		.row1 = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 		.row2 = {'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-		.ticks_since_last_block = 0
+		.ticks_since_last_block = -1 // display is last
 	};
 	return s;
 }

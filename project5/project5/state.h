@@ -9,13 +9,11 @@ typedef void state_fn(struct state *);
 
 struct state
 {
-
-    bool key_A;
+	state_fn* jump;
+	bool player_in_bottom;
 	
     char row1[16];
 	char row2[16];
-	int row_size;
-	
 	int ticks_since_last_block;
 	
 };

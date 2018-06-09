@@ -11,6 +11,7 @@
 #include "timer.h"
 #include "state.h"
 #include "game.h"
+#include "jump.h"
 
 struct state s;
 //char buffer[16] = {'a', 'b', 'c', 'd', 'e', 'f', 'e'};
@@ -30,7 +31,7 @@ int main(void)
 	
 	ini_lcd();
 		
-	s = make_state();
+	s = make_state(ready);
 
 	timer1_start(200);
 		
@@ -42,9 +43,14 @@ int main(void)
 }
 
 TIMER1_TICK()
-{
+{	
+	if (is_key_pressed(KEY_A) && s.jump == ready)
+	{
+		s.jump = begin_jump;
+	}
+	
+	s.jump(&s);
+	s = generate_and_move(s);
 	
 	display_game();
-	s = generate_and_move(s,true);
-	
 }

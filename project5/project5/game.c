@@ -1,18 +1,18 @@
 #include "game.h"
 
 
-struct state generate_and_move(struct state s, bool player_in_bottom)
+struct state generate_and_move(struct state s)
 {
-	move_row_left(s.row1, ' ', !player_in_bottom);
+	move_row_left(s.row1, ' ', !s.player_in_bottom);
 		
 	if (decide_if_block(s.ticks_since_last_block))
 	{
-		move_row_left(s.row2, 'B', player_in_bottom);
+		move_row_left(s.row2, 'B', s.player_in_bottom);
 		s.ticks_since_last_block = 0;
 	}
 	else
 	{
-		move_row_left(s.row2, ' ', player_in_bottom);
+		move_row_left(s.row2, ' ', s.player_in_bottom);
 		++s.ticks_since_last_block;
 	}
 	

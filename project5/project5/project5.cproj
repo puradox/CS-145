@@ -148,6 +148,12 @@
     <Compile Include="game.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="jump.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="jump.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="keypad.c">
       <SubType>compile</SubType>
     </Compile>
