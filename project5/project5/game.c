@@ -1,31 +1,46 @@
 #include "game.h"
 
+void menu(struct state* s)
+{
+	// TODO: print("press 1 to play!")
+	if (is_key_pressed(KEY_1))
+	{
+		//s->game_state = play;
+	}
+}
 
-struct state generate_and_move(struct state s)
+void play(struct state* s)
 {
 
-	if (detect_player_block_collision(s))
+
+	if (detect_player_block_collision(*s))
 	{
-		s.gg = true;
+		s->game_state = game_over;
 	}
 
-	move_row_left(s.row1, ' ', !s.player_in_bottom);
-		
-	if (decide_if_block(s.ticks_since_last_block))
+	move_row_left(s->row1, ' ', !s->player_in_bottom);
+	
+	if (decide_if_block(s->ticks_since_last_block))
 	{
-		move_row_left(s.row2, 'B', s.player_in_bottom);
-		s.ticks_since_last_block = 0;
+		move_row_left(s->row2, 'B', s->player_in_bottom);
+		s->ticks_since_last_block = 0;
 	}
 	else
 	{
-		move_row_left(s.row2, ' ', s.player_in_bottom);
-		++s.ticks_since_last_block;
+		move_row_left(s->row2, ' ', s->player_in_bottom);
+		++s->ticks_since_last_block;
 	}
-	
-	return s;
+	display_game(s);
 }
 
-move_row_left(char* screen, char new_column, bool player_in_row)
+void game_over(struct state* s)
+{
+	//s->row1 = {'G', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ', ' '};
+	
+}
+
+
+void move_row_left(char* screen, char new_column, bool player_in_row)
 {
 	if (player_in_row)
 	{
@@ -58,4 +73,13 @@ bool detect_player_block_collision(struct state s)
 	{
 		return s.row1[1] == 'B';
 	}
+}
+
+void display_game(struct state* s)
+{
+	pos_lcd(0,0);
+	puts_lcd2(s->row1);
+	
+	pos_lcd(1,0);
+	puts_lcd2(s->row2);
 }

@@ -9,6 +9,7 @@ typedef void state_fn(struct state *);
 
 struct state
 {
+	state_fn* game_state;
 	state_fn* jump;
 	bool player_in_bottom;
 	
