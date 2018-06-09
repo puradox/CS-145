@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-void move_screen_left(char*, int);
+#define ROW_SIZE 15
+
+void move_row_left(char*);
 
 #endif GAME_H

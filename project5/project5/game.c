@@ -1,10 +1,10 @@
 #include "game.h"
 
 
-move_screen_left(char* screen, int size)
+move_row_left(char* screen)
 {
 	
-	for (int i=0; i < size -1; ++i)
+	for (int i=0; i < ROW_SIZE -1; ++i)
 	{
 		screen[i] = screen[i+1];
 	}
