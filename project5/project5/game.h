@@ -7,6 +7,9 @@
 #include "jump.h"
 
 #define ROW_SIZE 16
+#define PLAYER 252
+#define BLOCK 255
+#define COIN 236
 
 // States
 void game_start(struct state *);

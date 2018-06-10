@@ -12,7 +12,6 @@ static const musical_note notes_mario_theme[] = {
     W__NOTE(G5),
     Q__NOTE(G4),
 };
-
 static musical_song song_mario_theme = SONG(notes_mario_theme, 120);
 
 static const musical_note notes_mario_game_over[] = {
@@ -27,11 +26,9 @@ static const musical_note notes_mario_game_over[] = {
     H__NOTE(AF4),
     WD_NOTE(G4),
 };
-
 static musical_song song_mario_game_over = SONG(notes_mario_game_over, 120);
 
 static const musical_note notes_none[] = {};
-
 static musical_song song_none = SONG(notes_none, 120);
 
 #endif

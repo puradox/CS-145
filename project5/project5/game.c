@@ -1,14 +1,12 @@
 #include "game.h"
 #include "state.h"
 
-#define BLOCK 255
-
 void game_start(struct state *s)
 {
     for (int i = 0; i < 16; i++)
         s->row1[i] = ' ';
 
-    s->row2[0] = 'P';
+    s->row2[0] = PLAYER;
     for (int i = 1; i < 16; i++)
         s->row2[i] = ' ';
 
@@ -47,7 +45,7 @@ void game_play(struct state *s)
 void move_row_left(char *screen, char new_column)
 {
     for (int i = 0; i < ROW_SIZE - 1; ++i)
-        if (screen[i] != 'P')
+        if (screen[i] != PLAYER)
             screen[i] = screen[i + 1];
 
     screen[ROW_SIZE - 1] = new_column;
@@ -60,11 +58,11 @@ bool decide_if_block(int ticks_since_block)
 
 bool detect_player_block_collision(struct state *s)
 {
-    if (s->row1[0] == 'P') // top row
+    if (s->row1[0] == PLAYER) // top row
     {
         return s->row1[1] == BLOCK;
     }
-    if (s->row2[0] == 'P') // bottom row
+    if (s->row2[0] == PLAYER) // bottom row
     {
         return s->row2[1] == BLOCK;
     }
