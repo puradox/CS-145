@@ -8,16 +8,9 @@ struct state make_state()
 {
 	struct state s = {
 		.next_screen = screen_start,
-        .next_game = game_play,
+        .next_game = game_start,
 		.next_jump = jump_ready,
 		//.next_player = player_start,
-
-        .row1 = "                ",
-        .row2 = "P               ",
-
-		.ticks_since_last_block = 4, // display is last
-		.gg = false,
-		.ticks_played = 0,
 
         .jump_counter = 0,
 	};

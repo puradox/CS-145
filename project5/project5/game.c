@@ -1,19 +1,28 @@
 #include "game.h"
+#include "state.h"
 
-void game_menu(struct state *s)
+void game_start(struct state *s)
 {
-    // TODO: print("press 1 to play!")
-    if (is_key_pressed(KEY_1))
-    {
-        //s->next_game = game_play;
-    }
+    for (int i = 0; i < 16; i++)
+        s->row1[i] = ' ';
+
+    s->row2[0] = 'P';
+    for (int i = 1; i < 16; i++)
+        s->row2[i] = ' ';
+
+    s->ticks_since_last_block = 4; // display is last
+    s->ticks_played = 0;
+    s->game_over = false;
+    s->next_game = game_play;
 }
 
 void game_play(struct state *s)
 {
     if (detect_player_block_collision(s))
     {
-        s->next_game = game_over;
+        s->game_over = true;
+        s->next_game = game_start;
+        return;
     }
 
     move_row_left(s->row1, ' ');
@@ -31,19 +40,6 @@ void game_play(struct state *s)
 
     s->ticks_played++;
     display_game(s);
-}
-
-void game_over(struct state *s)
-{
-    char buffer[16];
-    sprintf(buffer, "GG");
-    pos_lcd(0, 0);
-    puts_lcd2(buffer);
-
-    char buffer2[16];
-    sprintf(buffer2, "u ran %3i steps!", s->ticks_played);
-    pos_lcd(1, 0);
-    puts_lcd2(buffer2);
 }
 
 void move_row_left(char *screen, char new_column)

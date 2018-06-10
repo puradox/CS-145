@@ -61,6 +61,4 @@ TIMER1_TICK()
 
     // Run FSMs
     s.next_screen(&s);
-    s.next_jump(&s);
-    s.next_game(&s);
 }

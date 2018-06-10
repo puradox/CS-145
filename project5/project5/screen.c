@@ -1,20 +1,51 @@
+#include <stdio.h>
 #include "screen.h"
-#include "game.h"
+#include "lcd.h"
+
+char buffer[16];
 
 void print_intro()
 {
+    sprintf(buffer, "  @Mega Mario   ");
+    pos_lcd(0, 0);
+    puts_lcd2(buffer);
+
+    sprintf(buffer, " by David & Sam ");
+    pos_lcd(1, 0);
+    puts_lcd2(buffer);
 }
 
 void print_controls()
 {
+    sprintf(buffer, "    Controls    ");
+    pos_lcd(0, 0);
+    puts_lcd2(buffer);
+
+    sprintf(buffer, "Jump A | Pause B");
+    pos_lcd(1, 0);
+    puts_lcd2(buffer);
 }
 
-void print_pause()
+void print_pause(int score)
 {
+    sprintf(buffer, "     Pause      ");
+    pos_lcd(0, 0);
+    puts_lcd2(buffer);
+
+    sprintf(buffer, "Score: %9i", score);
+    pos_lcd(1, 0);
+    puts_lcd2(buffer);
 }
 
-void print_gameover()
+void print_game_over(int score)
 {
+    sprintf(buffer, "   Game over!   ");
+    pos_lcd(0, 0);
+    puts_lcd2(buffer);
+
+    sprintf(buffer, "Score: %9i", score);
+    pos_lcd(1, 0);
+    puts_lcd2(buffer);
 }
 
 void screen_start(struct state *s)
@@ -47,34 +78,53 @@ void screen_controls(struct state *s)
 void screen_controls_down(struct state *s)
 {
     if (!s->key_A)
+    {
+        s->next_game(s); // initialize game FSM state
         s->next_screen = screen_game;
+    }
 }
 
 void screen_game(struct state *s)
 {
     if (s->key_B)
     {
-        print_pause();
+        print_pause(s->ticks_played);
         s->next_screen = screen_pause;
     }
     else
     {
-        // s->next_game(s);
+        if (s->game_over)
+        {
+            print_game_over(s->ticks_played);
+            s->next_screen = screen_game_over;
+        }
+        else
+        {
+            s->next_jump(s); // check for jump
+            s->next_game(s); // game logic
+        }
     }
 }
 
 void screen_pause(struct state *s)
 {
-    // TODO(Sam): if there is time
+    if (s->key_A)
+        s->next_screen = screen_pause_down;
 }
 
-void screen_gameover(struct state *s)
+void screen_pause_down(struct state *s)
+{
+    if (!s->key_A)
+        s->next_screen = screen_game;
+}
+
+void screen_game_over(struct state *s)
 {
     if (s->key_A)
-        s->next_screen = screen_gameover_down;
+        s->next_screen = screen_game_over_down;
 }
 
-void screen_gameover_down(struct state *s)
+void screen_game_over_down(struct state *s)
 {
     if (!s->key_A)
     {

@@ -9,6 +9,7 @@
 #define ROW_SIZE 16
 
 // States
+void game_start(struct state *);
 void game_menu(struct state *);
 void game_play(struct state *);
 void game_over(struct state *);

@@ -23,7 +23,7 @@ void screen_pause(struct state *s); // TODO(Sam): if there is time
 void screen_pause_down(struct state *s); // TODO(Sam): if there is time
 
 // Gameover menu
-void screen_gameover(struct state *s);
-void screen_gameover_down(struct state *s);
+void screen_game_over(struct state *s);
+void screen_game_over_down(struct state *s);
 
 #endif
