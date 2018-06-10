@@ -7,7 +7,7 @@
 //
 // Clocked at 16ms per tick
 //
-// Calculating the CTC compare value (OCR1A)
+// Calculating the CTC compare value (OCR0)
 //
 // CPU_FREQ / PRESCALER / MILLISECONDS_IN_SECOND * ms - 1
 // 8,000,000 / 1024 / 1,000 * ms - 1
@@ -20,13 +20,12 @@ void timer0_start(void)
 {
     // Configure interrupts
     TIMSK |= (OCIE0); // enable CTC interrupt
-    sei();               // enable global interrupts
+    sei();            // enable global interrupts
 
     // Clear Timer on Compare Match (CTC)
     TCCR0 |= (1 << WGM01);      // enable CTC mode
-	// might be 4-1
-    OCR0 = 3;               // Set CTC compare value at 16ms per tick
-    TCCR0 |= TIMER0_CLK_64; // start timer at Fcpu/1024
+    OCR0 = 124;               // Set CTC compare value at 16ms per tick
+    TCCR0 |= TIMER0_CLK_1024; // start timer at Fcpu/1024
 }
 
 void timer0_stop(void)

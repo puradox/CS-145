@@ -20,14 +20,18 @@ struct state
     // Inputs
     //
 
+    uint16_t measured_voltage;
+
     // keypad
     bool key_A;
     bool key_B;
     bool key_C;
     bool key_D;
 
-    // analog
-    uint16_t measured_voltage;
+    //
+    // Screen FSM
+    //
+    int ticks_since_last_frame;
 
     //
     // Game FSM
@@ -56,7 +60,6 @@ struct state
     //
 
     uint8_t jump_counter;
-
 };
 
 struct state make_state();

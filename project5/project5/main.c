@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "analog.h"
 #include "game.h"
 #include "jump.h"
 #include "keypad.h"
@@ -15,42 +16,39 @@ static bool running = true;
 
 int main(void)
 {
-    // next step: timer0 calling
     ini_avr();
     ini_lcd();
+    analog_init();
 
     s = make_state();
 
-    ADCSRA |= (1 << ADEN);
-    ADMUX |= (1 << REFS0);
-
-    timer1_start(100);
+    timer2_start(); // ticks every 1ms
 
     while (running)
     {
     }
 
+    // Display error
+    clr_lcd();
+    pos_lcd(0, 0);
+    puts_lcd2("ERROR");
+
     return 0;
 }
 
-
-TIMER1_TICK()
+TIMER2_TICK()
 {
     // Reset the Watchdog timer (expires in 2.1 seconds)
     wdt_reset();
 
     // Check for invalid FSM states
-    if (s.next_screen == NULL)
+    if (s.next_screen == NULL || s.next_game == NULL || s.next_jump == NULL || s.next_player == NULL)
     {
         running = false;
         return;
     }
 
-    // Wait for the ADC to finish converting
-    while ((ADCSRA & 64) != 0)
-    {
-    }
-    ADCSRA |= (1 << ADSC); // automatically cleared when done
+    analog_wait();
 
     // Update inputs
     s.measured_voltage = ADC;
@@ -61,14 +59,5 @@ TIMER1_TICK()
 
     // Run FSMs
     s.next_screen(&s);
-}
-
-
-TIMER2_TICK()
-{
-	// Reset the Watchdog timer (expires in 2.1 seconds)
-	wdt_reset();
-
-	// Run the finite state machines
-	s.next_player(&s);
+    s.next_player(&s);
 }

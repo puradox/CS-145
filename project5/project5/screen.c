@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "screen.h"
 #include "lcd.h"
+#include "player.h"
+#include "song_list.h"
 
 char buffer[16];
 
@@ -51,6 +53,7 @@ void print_game_over(int score)
 void screen_start(struct state *s)
 {
     print_intro();
+    player_change_song(s, song_mario_theme);
     s->next_screen = screen_intro;
 }
 
@@ -93,15 +96,21 @@ void screen_game(struct state *s)
     }
     else
     {
-        if (s->game_over)
-        {
-            print_game_over(s->ticks_played);
-            s->next_screen = screen_game_over;
-        }
-        else
+        s->ticks_since_last_frame++;
+
+        if (s->ticks_since_last_frame == 50)
         {
             s->next_jump(s); // check for jump
             s->next_game(s); // game logic
+
+            if (s->game_over)
+            {
+                print_game_over(s->ticks_played);
+                player_change_song(s, song_mario_game_over);
+                s->next_screen = screen_game_over;
+            }
+
+            s->ticks_since_last_frame = 0;
         }
     }
 }
@@ -129,6 +138,7 @@ void screen_game_over_down(struct state *s)
     if (!s->key_A)
     {
         print_intro();
+        player_change_song(s, song_mario_theme);
         s->next_screen = screen_intro;
     }
 }

@@ -3,6 +3,8 @@
 #include "musical_notes.h"
 #include "player.h"
 
+#define VOLUME 9
+
 uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 {
     // SEC_IN_MIN * MS_IN_SEC / BPM / 64 * 1/64 notes = duration
@@ -12,15 +14,22 @@ uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 void player_start(struct state *s)
 {
     s->note_index = 0;
-	musical_song song = s->song;
+    s->duration_curr = 0;
+    s->duration_max = 0;
+    s->next_player = player_playing;
+}
+
+void player_change_song(struct state *s, musical_song song)
+{
+    audio_on();
+    s->song = song;
+    s->note_index = 0;
+
 	musical_note note = song.notes[s->note_index];
+    play_freq(note.freq, VOLUME);
 
     s->duration_curr = 0;
     s->duration_max = duration_to_ms(song.tempo, note.duration);
-    s->next_player = player_playing;
-
-    audio_on();
-    play_freq(note.freq, 255);
 }
 
 void player_playing(struct state* s)
@@ -31,17 +40,15 @@ void player_playing(struct state* s)
 	}
 	else
 	{
-        musical_song song = s->song;
         s->note_index++;
 
-		if (s->note_index < song.length)
+		if (s->note_index < s->song.length)
 		{
-            musical_note note = song.notes[s->note_index];
+            musical_note note = s->song.notes[s->note_index];
+			play_freq(note.freq, VOLUME);
 
 			s->duration_curr = 0;
-            s->duration_max = duration_to_ms(song.tempo, note.duration);
-
-			play_freq(note.freq, 255);
+            s->duration_max = duration_to_ms(s->song.tempo, note.duration);
 		}
 		else
 		{
