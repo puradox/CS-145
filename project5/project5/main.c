@@ -1,15 +1,17 @@
 #include <avr/io.h>
 #include <avr/wdt.h>
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
 
+#include "game.h"
+#include "jump.h"
 #include "keypad.h"
 #include "lcd.h"
 #include "state.h"
 #include "timer.h"
 
 static struct state s;
-char running = true;
+static bool running = true;
 
 int main(void)
 {
@@ -22,7 +24,7 @@ int main(void)
     ADCSRA |= (1 << ADEN);
     ADMUX |= (1 << REFS0);
 
-    timer1_start(500);
+    timer1_start(100);
 
     while (running)
     {
@@ -40,7 +42,7 @@ TIMER1_TICK()
     // Check for invalid FSM states
     if (s.next_screen == NULL)
     {
-        running = 0;
+        running = false;
         return;
     }
 
@@ -52,11 +54,13 @@ TIMER1_TICK()
 
     // Update inputs
     s.measured_voltage = ADC;
-    s.key_A = is_key_pressed(KEY_A);
-    s.key_B = is_key_pressed(KEY_B);
-    s.key_C = is_key_pressed(KEY_C);
-    s.key_D = is_key_pressed(KEY_D); // pause
+    s.key_A = is_key_pressed(KEY_A); // continue & jump
+    s.key_B = is_key_pressed(KEY_B); // pause
+    // s.key_C = is_key_pressed(KEY_C);
+    // s.key_D = is_key_pressed(KEY_D);
 
     // Run FSMs
     s.next_screen(&s);
+    s.next_jump(&s);
+    s.next_game(&s);
 }
