@@ -17,15 +17,13 @@ typedef struct
 
 typedef struct
 {
-    const char title[16];
-    const uint8_t length;
-    const uint8_t tempo;
-    const musical_note *notes;
+    uint8_t length;
+    uint8_t tempo;
+    musical_note *notes;
 } musical_song;
 
-#define SONG(title, notes, tempo)               \
+#define SONG(notes, tempo)                      \
     {                                           \
-        title,                                  \
         (sizeof(notes) / sizeof(musical_note)), \
         tempo,                                  \
         notes                                   \

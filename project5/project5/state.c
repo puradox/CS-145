@@ -3,6 +3,7 @@
 #include "game.h"
 #include "jump.h"
 #include "player.h"
+#include "song_list.h"
 
 struct state make_state()
 {
@@ -13,8 +14,8 @@ struct state make_state()
 		//.next_player = player_start,
 
         .jump_counter = 0,
-		
-		.song_list = song_mario_theme,
+
+		.song = song_mario_theme,
 		.note_index = 0,
 		.duration_curr = 0,
 	};

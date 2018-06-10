@@ -1,6 +1,8 @@
 #include "game.h"
 #include "state.h"
 
+#define BLOCK 255
+
 void game_start(struct state *s)
 {
     for (int i = 0; i < 16; i++)
@@ -29,7 +31,7 @@ void game_play(struct state *s)
 
     if (decide_if_block(s->ticks_since_last_block))
     {
-        move_row_left(s->row2, 'B');
+        move_row_left(s->row2, BLOCK);
         s->ticks_since_last_block = 0;
     }
     else
@@ -60,11 +62,11 @@ bool detect_player_block_collision(struct state *s)
 {
     if (s->row1[0] == 'P') // top row
     {
-        return s->row1[1] == 'B';
+        return s->row1[1] == BLOCK;
     }
     if (s->row2[0] == 'P') // bottom row
     {
-        return s->row2[1] == 'B';
+        return s->row2[1] == BLOCK;
     }
 }
 

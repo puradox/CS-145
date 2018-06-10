@@ -43,7 +43,7 @@ struct state
     // Player FSM
     //
 
-    musical_song *song_list;
+    musical_song song;
     uint16_t song_list_len;
 
     uint8_t song_index;

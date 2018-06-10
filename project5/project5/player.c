@@ -12,7 +12,7 @@ uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 void player_start(struct state *s)
 {
     s->note_index = 0;
-	musical_song song = s->song_list[s->song_index];
+	musical_song song = s->song;
 	musical_note note = song.notes[s->note_index];
 
     s->duration_curr = 0;
@@ -31,7 +31,7 @@ void player_playing(struct state* s)
 	}
 	else
 	{
-        musical_song song = s->song_list[s->song_index];
+        musical_song song = s->song;
         s->note_index++;
 
 		if (s->note_index < song.length)
