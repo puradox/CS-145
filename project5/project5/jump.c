@@ -12,7 +12,7 @@ void jump_ready(struct state *s)
 
 void jump_hover(struct state *s)
 {
-    if (s->jump_counter == 1)
+    if (s->jump_counter == 3)
     {
         s->row1[0] = ' ';
         s->row2[0] = 'P';

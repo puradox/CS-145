@@ -52,14 +52,14 @@ void screen_controls_down(struct state *s)
 
 void screen_game(struct state *s)
 {
-    if (s->key_D)
+    if (s->key_B)
     {
         print_pause();
         s->next_screen = screen_pause;
     }
     else
     {
-        s->next_game(s);
+        // s->next_game(s);
     }
 }
 

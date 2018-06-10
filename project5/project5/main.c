@@ -24,7 +24,7 @@ int main(void)
     ADCSRA |= (1 << ADEN);
     ADMUX |= (1 << REFS0);
 
-    timer1_start(500);
+    timer1_start(100);
 
     while (running)
     {
@@ -43,7 +43,7 @@ TIMER1_TICK()
     if (s.next_screen == NULL)
     {
         running = false;
-    return;
+        return;
     }
 
     // Wait for the ADC to finish converting
