@@ -12,14 +12,15 @@ uint16_t duration_to_ms(uint8_t bpm, uint8_t duration)
 void player_start(struct state *s)
 {
     s->note_index = 0;
-	musical_note note = s->song_list[s->song_index].notes[s->note_index];
+	musical_song song = s->song_list[s->song_index];
+	musical_note note = song.notes[s->note_index];
 
     s->duration_curr = 0;
-    s->duration_max = duration_to_ms(s->tempo, note.duration);
+    s->duration_max = duration_to_ms(song.tempo, note.duration);
     s->next_player = player_playing;
 
     audio_on();
-    play_freq(note.freq, s->volume);
+    play_freq(note.freq, 255);
 }
 
 void player_playing(struct state* s)

@@ -136,6 +136,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="audio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="audio.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="avr.c">
       <SubType>compile</SubType>
     </Compile>
@@ -167,6 +173,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="musical_notes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="screen.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="screen.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="song_list.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="state.c">

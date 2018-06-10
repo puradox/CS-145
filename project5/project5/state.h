@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "screen.h"
+#include "musical_notes.h"
 
 struct state;
 typedef void state_fn(struct state *);
@@ -13,6 +14,7 @@ struct state
     state_fn *next_screen;
     state_fn *next_game;
 	state_fn *next_jump;
+	state_fn *next_player;
 
     //
     // Inputs
@@ -52,6 +54,8 @@ struct state
     //
     // Jump FSM
     //
+
+    uint8_t jump_counter;
 
 };
 

@@ -63,7 +63,7 @@ void screen_game(struct state *s)
     }
 }
 
-void screen_pause(struct state *s);
+void screen_pause(struct state *s)
 {
     // TODO(Sam): if there is time
 }

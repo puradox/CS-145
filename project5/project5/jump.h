@@ -4,10 +4,7 @@
 #include <stdbool.h>
 #include "state.h"
 
-void ready(struct state *);
-void begin_jump(struct state *);
-void mid_jump(struct state *);
-void end_jump(struct state *);
-
+void jump_ready(struct state *);
+void jump_hover(struct state *);
 
 #endif JUMP_H

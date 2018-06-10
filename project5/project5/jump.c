@@ -1,25 +1,26 @@
 #include "jump.h"
 
-void ready(struct state* s)
+void jump_ready(struct state *s)
 {
-	s->player_in_bottom = true;
-
     if (s->key_A)
-        s->next_jump = begin_jump;
+    {
+        s->row1[0] = 'P';
+        s->row2[0] = ' ';
+        s->next_jump = jump_hover;
+    }
 }
 
-void begin_jump(struct state* s)
+void jump_hover(struct state *s)
 {
-	s->player_in_bottom = false;
-	s->next_jump = mid_jump;
-}
-
-void mid_jump(struct state* s)
-{
-	s->next_jump = end_jump;
-}
-
-void end_jump(struct state* s)
-{
-	s->next_jump = ready;
+    if (s->jump_counter == 1)
+    {
+        s->row1[0] = ' ';
+        s->row2[0] = 'P';
+        s->jump_counter = 0;
+        s->next_jump = jump_ready;
+    }
+    else
+    {
+        s->jump_counter++;
+    }
 }

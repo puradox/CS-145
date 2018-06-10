@@ -19,5 +19,5 @@ void audio_off(void)
 void play_freq(uint16_t note, uint8_t volume)
 {
     ICR1 = note;
-    OCR1B = note / ((10 - volume + 1) * 20));
+    OCR1B = note / ((10 - volume + 1) * 20);
 }
