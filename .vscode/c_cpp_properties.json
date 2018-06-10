@@ -33,7 +33,9 @@
                 "/usr/local/include",
                 "${workspaceFolder}"
             ],
-            "defines": [],
+            "defines": [
+                "__AVR_ATmega32__"
+            ],
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
@@ -49,9 +51,11 @@
             "name": "Win32",
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
+                "C:/Program Files (x86)/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/avr/include",
                 "${workspaceFolder}"
             ],
             "defines": [
+                "__AVR_ATmega32__",
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
@@ -60,11 +64,13 @@
             "browse": {
                 "path": [
                     "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
+                    "C:/Program Files (x86)/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/avr/include/*",
                     "${workspaceFolder}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "cStandard": "c11"
         }
     ],
     "version": 4

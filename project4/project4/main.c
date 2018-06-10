@@ -53,7 +53,7 @@ TIMER1_TICK()
     // Update inputs
     s.measured_voltage = ADC;
     s.key_A = is_key_pressed(KEY_A);
-	
+
 	if (s.key_A)
 	{
 		s.next_display = display_restart;
@@ -61,7 +61,4 @@ TIMER1_TICK()
 
     // Run FSMs
     s.next_display(&s);
-	
-
-
 }
