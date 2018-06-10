@@ -20,6 +20,10 @@ struct state make_state()
 		.ticks_played = 0,
 
         .jump_counter = 0,
+		
+		.song_list = song_mario_theme,
+		.note_index = 0,
+		.duration_curr = 0,
 	};
 	return s;
 }

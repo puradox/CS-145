@@ -39,9 +39,9 @@ void player_playing(struct state* s)
             musical_note note = song.notes[s->note_index];
 
 			s->duration_curr = 0;
-            s->duration_max = duration_to_ms(s->tempo, note.duration);
+            s->duration_max = duration_to_ms(song.tempo, note.duration);
 
-			play_freq(note.freq, s->volume);
+			play_freq(note.freq, 255);
 		}
 		else
 		{
