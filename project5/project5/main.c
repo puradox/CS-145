@@ -62,3 +62,13 @@ TIMER1_TICK()
     // Run FSMs
     s.next_screen(&s);
 }
+
+
+TIMER2_TICK()
+{
+	// Reset the Watchdog timer (expires in 2.1 seconds)
+	wdt_reset();
+
+	// Run the finite state machines
+	s.next_player(&s);
+}

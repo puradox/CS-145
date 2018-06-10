@@ -13,6 +13,10 @@ struct state make_state()
 		//.next_player = player_start,
 
         .jump_counter = 0,
+		
+		.song_list = song_mario_theme,
+		.note_index = 0,
+		.duration_curr = 0,
 	};
 	return s;
 }
