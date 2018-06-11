@@ -25,6 +25,7 @@ void game_play(struct state *s)
         return;
     }
 
+/*
     move_row_left(s->row1, ' ');
 
     if (decide_if_block(s->ticks_since_last_block))
@@ -37,7 +38,30 @@ void game_play(struct state *s)
         move_row_left(s->row2, ' ');
         ++s->ticks_since_last_block;
     }
-
+*/
+	if (decide_if_block(s->ticks_since_last_block))
+	{
+		s->ticks_since_last_block = 0;
+		if (s->block_counter < 100)
+		{
+			    move_row_left(s->row2, BLOCK);
+				move_row_left(s->row1, ' ');
+				s->block_counter += 40;
+		}
+		else
+		{
+				move_row_left(s->row1, BLOCK);
+				move_row_left(s->row2, ' ');
+				s->block_counter -= 100;
+		}
+	}
+	else
+	{
+		move_row_left(s->row1, ' ');
+		move_row_left(s->row2, ' ');
+		++s->ticks_since_last_block;
+	}
+	
     s->ticks_played++;
     display_game(s);
 }

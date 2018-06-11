@@ -14,6 +14,9 @@ struct state make_state()
 		.next_player = player_start,
 
         .jump_counter = 0,
+		
+		.ticks_played = 0,
+		.block_counter = 0,
 
 		.song = song_none,
 		.note_index = 0,
