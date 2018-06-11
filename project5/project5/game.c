@@ -1,5 +1,6 @@
 #include "game.h"
 #include "state.h"
+#include <stdlib.h>
 
 void game_start(struct state *s)
 {
@@ -11,6 +12,7 @@ void game_start(struct state *s)
         s->row2[i] = ' ';
 
     s->ticks_since_last_block = 4; // display is last
+	s->ticks_until_next_block = ((uint8_t)rand() & 0x07) + 4; // 4 - 11
     s->ticks_played = 0;
     s->game_over = false;
     s->next_game = game_play;
@@ -25,34 +27,21 @@ void game_play(struct state *s)
         return;
     }
 
-/*
-    move_row_left(s->row1, ' ');
-
-    if (decide_if_block(s->ticks_since_last_block))
-    {
-        move_row_left(s->row2, BLOCK);
-        s->ticks_since_last_block = 0;
-    }
-    else
-    {
-        move_row_left(s->row2, ' ');
-        ++s->ticks_since_last_block;
-    }
-*/
-	if (decide_if_block(s->ticks_since_last_block))
+	if (s->ticks_since_last_block == s->ticks_until_next_block)
 	{
 		s->ticks_since_last_block = 0;
-		if (s->block_counter < 100)
+		
+		if ((uint8_t)rand() > 100)
 		{
-			    move_row_left(s->row2, BLOCK);
 				move_row_left(s->row1, ' ');
-				s->block_counter += 40;
+			    move_row_left(s->row2, BLOCK);
+				s->ticks_until_next_block = ((uint8_t)rand() & 0x07) + 4; // 4 to 11
 		}
 		else
 		{
 				move_row_left(s->row1, BLOCK);
 				move_row_left(s->row2, ' ');
-				s->block_counter -= 100;
+				s->ticks_until_next_block = ((uint8_t)rand() & 0x03) + 3; // 3 to 6
 		}
 	}
 	else
@@ -73,11 +62,6 @@ void move_row_left(char *screen, char new_column)
             screen[i] = screen[i + 1];
 
     screen[ROW_SIZE - 1] = new_column;
-}
-
-bool decide_if_block(int ticks_since_block)
-{
-    return ticks_since_block == 7;
 }
 
 bool detect_player_block_collision(struct state *s)

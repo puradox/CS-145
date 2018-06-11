@@ -1,5 +1,7 @@
 #include "jump.h"
 #include "game.h"
+#include "player.h"
+#include "song_list.h"
 
 void jump_ready(struct state *s)
 {
@@ -8,6 +10,7 @@ void jump_ready(struct state *s)
         s->row1[0] = PLAYER;
         s->row2[0] = ' ';
         s->next_jump = jump_hover;
+		player_change_song(s, song_coin);
     }
 }
 

@@ -14,6 +14,12 @@ static const musical_note notes_mario_theme[] = {
 };
 static musical_song song_mario_theme = SONG(notes_mario_theme, 120);
 
+static const musical_note notes_coin[] = {
+	E__NOTE(A5),
+	HD_NOTE(E6),
+};
+static musical_song song_coin = SONG(notes_coin, 180);
+
 static const musical_note notes_mario_game_over[] = {
     HD_NOTE(C5),
     HD_NOTE(G4),

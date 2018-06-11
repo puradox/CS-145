@@ -2,6 +2,7 @@
 #include <avr/wdt.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 #include "analog.h"
 #include "game.h"
@@ -16,6 +17,7 @@ static bool running = true;
 
 int main(void)
 {
+	srand(420);
     ini_avr();
     ini_lcd();
     analog_init();

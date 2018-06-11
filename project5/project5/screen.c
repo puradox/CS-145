@@ -59,6 +59,7 @@ void screen_start(struct state *s)
 
 void screen_intro(struct state *s)
 {
+	print_intro();
     if (s->key_A)
         s->next_screen = screen_intro_down;
 }
@@ -97,8 +98,8 @@ void screen_game(struct state *s)
     else
     {
         s->ticks_since_last_frame++;
-
-        if (s->ticks_since_last_frame == 50)
+		
+        if (s->ticks_since_last_frame == s->measured_voltage / 20)
         {
             s->next_jump(s); // check for jump
             s->next_game(s); // game logic

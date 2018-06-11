@@ -19,7 +19,6 @@ void game_over(struct state *);
 
 // Helpers
 void move_row_left(char*, char);
-bool decide_if_block();
 bool detect_player_block_collision(struct state *s);
 void display_game(struct state *s);
 

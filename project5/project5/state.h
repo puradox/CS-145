@@ -40,9 +40,9 @@ struct state
     char row1[16];
 	char row2[16];
 	int ticks_since_last_block;
+	int ticks_until_next_block;
 	int ticks_played;
     bool game_over;
-	int block_counter;
 
     //
     // Player FSM
